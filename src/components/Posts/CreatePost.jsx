@@ -2,11 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { profileImage } from "../../assets";
 import { BsFillCameraFill, BsFillEmojiSmileFill } from "react-icons/bs";
 import EmojiPicker from "emoji-picker-react";
+import { useSelector } from "react-redux";
+import { authSelector } from "../../features/authSlice";
 
 const CreatePost = () => {
   const [showEmojiPicker, setEmojiPicker] = useState(false);
   const emojiPickerRef = useRef(null);
   const emojiIconRef = useRef(null);
+  const { foundUser } = useSelector(authSelector);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -31,7 +34,7 @@ const CreatePost = () => {
       <h1 className="text-start border-b-2 text-xl">Create Post</h1>
       <div className="border-b-2 mt-4 flex py-4">
         <img
-          src={profileImage}
+          src={foundUser?.profile}
           alt=""
           className="w-16 h-16 rounded-full object-contain"
         />

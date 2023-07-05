@@ -2,15 +2,18 @@ import React from "react";
 import { Logo, profileImage } from "../../assets";
 import { BsMoonStars } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { authSelector } from "../../features/authSlice";
 const Header = () => {
   const navigate = useNavigate();
+  const { foundUser } = useSelector(authSelector);
   return (
     <div className="flex  items-center justify-between px-[80px] layout-shadow bg-white h-20 fixed left-0 right-0 top-0 z-50">
       <div
         className="text-2xl font-semibold flex items-center justify-center  text-violet-500 italic hover:cursor-pointer"
         onClick={() => navigate("/")}
       >
-        <img src={Logo} alt="logo" />
+        <img src={Logo} alt="SocialSphere" />
 
         <h1 className=" text-[#60A5FA] text-3xl logo">SocialSphere</h1>
       </div>
@@ -42,7 +45,7 @@ const Header = () => {
       <div className="flex items-center justify-center gap-7">
         <BsMoonStars className="w-7 h-7 hover:cursor-pointer" fill="#5EBBFF" />
         <img
-          src={profileImage}
+          src={foundUser?.profile}
           alt=""
           className="w-14 h-14 rounded-full  object-contain"
         />

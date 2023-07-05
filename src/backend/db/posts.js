@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
+import { devangProfile, swastikPosts, yashProfile } from "./assets";
 
 /**
  * Posts can be added here.
@@ -8,29 +9,129 @@ import { formatDate } from "../utils/authUtils";
 
 export const posts = [
   {
-    _id: uuid(),
-    content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+    _id: "1",
+    content: "Hey, What's up. New to SocialSphere...",
+    postMedia: swastikPosts[1],
     likes: {
-      likeCount: 0,
-      likedBy: [],
+      likeCount: 240,
+      likedBy: [
+        {
+          _id: "3",
+          firstName: "Devang",
+          lastName: "Mehra",
+          username: "devang123",
+          profile: devangProfile,
+        },
+        {
+          _id: "4",
+          firstName: "Yash",
+          lastName: "Rawat",
+          username: "yash123",
+          profile: yashProfile,
+        },
+      ],
       dislikedBy: [],
     },
-    username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    comments: [
+      {
+        _id: "1",
+        comment: "Don't I look good",
+        username: "devang123",
+        createdAt: "2023-06-11T10:33:36+05:30",
+        firstName: "Devang",
+        lastName: "Mehra",
+        profile: devangProfile,
+      },
+    ],
+    username: "swastik123",
+    firstName: "Swastik",
+    lastName: "Patro",
+    createdAt: "2023-05-11T10:33:36+05:30",
+    updatedAt: "2023-05-11T10:33:36+05:30",
+    userId: "2",
   },
   {
-    _id: uuid(),
-    content:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+    _id: "2",
+    content: "It's nice weather outside...",
+    postMedia: swastikPosts[1],
     likes: {
-      likeCount: 0,
-      likedBy: [],
+      likeCount: 2,
+      likedBy: [
+        {
+          _id: "3",
+          firstName: "Devang",
+          lastName: "Mehra",
+          username: "devang123",
+          profile: devangProfile,
+        },
+        {
+          _id: "4",
+          firstName: "Yash",
+          lastName: "Rawat",
+          username: "yash123",
+          profile: yashProfile,
+        },
+      ],
       dislikedBy: [],
     },
-    username: "shubhamsoni",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    comments: [
+      {
+        _id: "1",
+        comment: "Don't I look good",
+        username: "devang123",
+        createdAt: "2023-06-11T10:33:36+05:30",
+        firstName: "Devang",
+        lastName: "Mehra",
+        profile: devangProfile,
+      },
+    ],
+    username: "devang123",
+    firstName: "Devang",
+    lastName: "Mehra",
+    createdAt: "2023-05-11T10:33:36+05:30",
+    updatedAt: "2023-05-11T10:33:36+05:30",
+    userId: "3",
+  },
+  {
+    _id: "3",
+    content: "Heavy leg workout today at gym 💪",
+    postMedia: swastikPosts[1],
+    likes: {
+      likeCount: 2,
+      likedBy: [
+        {
+          _id: "3",
+          firstName: "Devang",
+          lastName: "Mehra",
+          username: "devang123",
+          profile: devangProfile,
+        },
+        {
+          _id: "4",
+          firstName: "Yash",
+          lastName: "Rawat",
+          username: "yash123",
+          profile: yashProfile,
+        },
+      ],
+      dislikedBy: [],
+    },
+    comments: [
+      {
+        _id: "1",
+        comment: "Don't I look good",
+        username: "devang123",
+        createdAt: "2023-06-11T10:33:36+05:30",
+        firstName: "Devang",
+        lastName: "Mehra",
+        profile: devangProfile,
+      },
+    ],
+    username: "yash123",
+    firstName: "Yash",
+    lastName: "Rawat",
+    createdAt: "2023-05-11T10:33:36+05:30",
+    updatedAt: "2023-05-11T10:33:36+05:30",
+    userId: "4",
   },
 ];
