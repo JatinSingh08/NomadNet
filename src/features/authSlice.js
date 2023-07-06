@@ -2,11 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginService, signupService } from "../services/apiServices";
 
 const initialState = {
-  encodedToken:
-    localStorage.getItem("encodedToken") &&
-    localStorage.getItem("encodedToken") !== "undefined"
-      ? localStorage.getItem("encodedToken")
-      : null,
+  encodedToken: localStorage.getItem("encodedToken"),
   foundUser:
     !localStorage.getItem("foundUser") ||
     localStorage.getItem("foundUser") === "undefined"
@@ -23,7 +19,7 @@ export const userLogin = createAsyncThunk(
   async ({ username, password }, { rejectWithValue }) => {
     try {
       const response = await loginService(username, password);
-      console.log('userLogin', response);
+      console.log("userLogin", response);
       if (response.status === 200 || response.status === 201) {
         return {
           encodedToken: response.data.encodedToken,
@@ -78,7 +74,7 @@ const authSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.loggingIn = false;
-        state.encodedToken = action.payload.foundUser;
+        state.encodedToken = action.payload.encodedToken;
         localStorage.setItem("encodedToken", action.payload.encodedToken);
         state.foundUser = action.payload.foundUser;
         localStorage.setItem(

@@ -1,16 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
-import { profileImage } from "../../assets";
 import { BsFillCameraFill, BsFillEmojiSmileFill } from "react-icons/bs";
 import EmojiPicker from "emoji-picker-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../../features/authSlice";
+import { createNewPost } from "../../features/postsSlice";
 
 const CreatePost = () => {
   const [showEmojiPicker, setEmojiPicker] = useState(false);
   const emojiPickerRef = useRef(null);
   const emojiIconRef = useRef(null);
-  const { foundUser } = useSelector(authSelector);
+  const { encodedToken, foundUser } = useSelector(authSelector);
+  const [postData, setPostData] = useState({
+    firstName: foundUser?.firstName,
+    lastName: foundUser?.lastName,
+    userId: foundUser?._id,
+    content: '',
+    postMedia: ''
+  });
+  const dispatch = useDispatch();
 
+  const createPostHandler = () => { 
+    dispatch(createNewPost({encodedToken, postData}));
+  }
+  
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -30,7 +42,7 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className="shadow card rounded-2xl p-4">
+    <div className=" card rounded-2xl p-4">
       <h1 className="text-start border-b-2 text-xl">Create Post</h1>
       <div className="border-b-2 mt-4 flex py-4">
         <img
@@ -41,6 +53,7 @@ const CreatePost = () => {
         <textarea
           placeholder="What is happening?!"
           className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
+          onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
         ></textarea>
       </div>
 
@@ -69,7 +82,9 @@ const CreatePost = () => {
             {showEmojiPicker && <EmojiPicker height="400px" />}
           </div>
         </div>
-        <button className="button text-slate-100 text-lg rounded-lg shadow-lg px-8 py-1 font-semibold">
+        <button className="button text-slate-100 text-lg rounded-lg shadow-lg px-8 py-1 font-semibold"
+        onClick={createPostHandler}
+        >
           Post
         </button>
       </div>

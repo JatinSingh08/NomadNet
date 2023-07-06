@@ -13,7 +13,7 @@ export const posts = [
     content: "Hey, What's up. New to SocialSphere...",
     postMedia: swastikPosts[1],
     likes: {
-      likeCount: 240,
+      likeCount: 2,
       likedBy: [
         {
           _id: "3",
@@ -37,7 +37,7 @@ export const posts = [
         _id: "1",
         comment: "Don't I look good",
         username: "devang123",
-        createdAt: "2023-06-11T10:33:36+05:30",
+        createdAt: formatDate(),
         firstName: "Devang",
         lastName: "Mehra",
         profile: devangProfile,
@@ -46,8 +46,8 @@ export const posts = [
     username: "swastik123",
     firstName: "Swastik",
     lastName: "Patro",
-    createdAt: "2023-05-11T10:33:36+05:30",
-    updatedAt: "2023-05-11T10:33:36+05:30",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
     userId: "2",
   },
   {
@@ -79,7 +79,7 @@ export const posts = [
         _id: "1",
         comment: "Don't I look good",
         username: "devang123",
-        createdAt: "2023-06-11T10:33:36+05:30",
+        createdAt: formatDate(),
         firstName: "Devang",
         lastName: "Mehra",
         profile: devangProfile,
@@ -88,8 +88,8 @@ export const posts = [
     username: "devang123",
     firstName: "Devang",
     lastName: "Mehra",
-    createdAt: "2023-05-11T10:33:36+05:30",
-    updatedAt: "2023-05-11T10:33:36+05:30",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
     userId: "3",
   },
   {
@@ -121,7 +121,7 @@ export const posts = [
         _id: "1",
         comment: "Don't I look good",
         username: "devang123",
-        createdAt: "2023-06-11T10:33:36+05:30",
+        createdAt: formatDate(),
         firstName: "Devang",
         lastName: "Mehra",
         profile: devangProfile,
@@ -130,8 +130,8 @@ export const posts = [
     username: "yash123",
     firstName: "Yash",
     lastName: "Rawat",
-    createdAt: "2023-05-11T10:33:36+05:30",
-    updatedAt: "2023-05-11T10:33:36+05:30",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
     userId: "4",
   },
 ];

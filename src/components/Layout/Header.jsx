@@ -8,7 +8,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { foundUser } = useSelector(authSelector);
   return (
-    <div className="flex  items-center justify-between px-[80px] layout-shadow bg-white h-20 fixed left-0 right-0 top-0 z-50">
+    <div className="flex  items-center justify-between px-[80px] bg-white h-20 fixed left-0 right-0 top-0 z-50">
       <div
         className="text-2xl font-semibold flex items-center justify-center  text-violet-500 italic hover:cursor-pointer"
         onClick={() => navigate("/")}

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createPostService, getAllPostService } from "../services/apiServices";
+import { createPostService, dislikePostService, getAllPostService, likePostService } from "../services/apiServices";
 
 const initialState = {
   postsData: [],
@@ -41,7 +41,37 @@ export const createNewPost = createAsyncThunk(
       console.log({error});
       return rejectWithValue(error?.message);
     }
-  })
+  }
+)
+
+export const likePost = createAsyncThunk(
+  'posts/likePost',
+  async ({encodedToken, postId}, { rejectWithValue }) => {
+    try {
+      const response = await likePostService(encodedToken, postId);
+      if(response.status === 200 || response.status === 201) {
+        return response.data.posts;
+      }
+    } catch (error) {
+      console.log(error.message);
+      return rejectWithValue(error?.message);
+    }
+  }
+)
+
+export const dislikePost = createAsyncThunk(
+  'posts/dislikePost',
+  async ({ encodedToken, postId }, { rejectWithValue }) => {
+    try {
+      const response = await dislikePostService(encodedToken, postId);
+      if(response.status === 200 || response.status === 201) {
+        return response.data.posts;
+      }
+    } catch (error) {
+      console.log(error?.message);
+      return rejectWithValue(error?.message);
+    }
+  }
 )
 
 const postsSlice = createSlice({
@@ -49,9 +79,40 @@ const postsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchPosts.fulfilled, (state, action) => {
+    builder
+      .addCase(fetchPosts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
       state.postsData = action.payload;
       console.log("action", action.payload);
+    })
+    .addCase(fetchPosts.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    .addCase(createNewPost.fulfilled, (state, action) => {
+      if(action.payload) state.postsData = action.payload;
+    })
+    .addCase(likePost.pending, (state) => {
+      state.disabled.likeDisabled = true;
+    })
+    .addCase(likePost.fulfilled, (state, action) => {
+      state.disabled.likeDisabled = false;
+      state.postsData = action.payload;
+    })
+    .addCase(likePost.rejected, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(dislikePost.pending, (state) => {
+      state.disabled.likeDisabled = true;
+    })
+    .addCase(dislikePost.fulfilled, (state, action) => {
+      state.disabled.likeDisabled = false;
+      state.postsData = action.payload;
+    })
+    .addCase(dislikePost.rejected, (state, action) => {
+      state.error = action.payload;
     })
   }
 })

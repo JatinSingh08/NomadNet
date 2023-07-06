@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300&family=Paytone+One&family=Playfair+Display&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300&family=Paytone+One&family=Playfair+Display&display=swap'); */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Figtree:wght@300&family=Paytone+One&family=Playfair+Display&display=swap'); */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +12,7 @@
   * {
     margin: 0;
     padding: 0;
+    /* font-family: 'Playfair Display', serif; */
     font-family: 'Poppins', sans-serif;
   }
   .button {
@@ -34,5 +39,21 @@
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  .scrollbar-theme::-webkit-scrollbar {
+    width: 4px;
+    margin-top: 4px;
+  }
+  .scrollbar-theme::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .scrollbar-theme::-webkit-scrollbar-thumb {
+    background: #9767ff;
+    border-radius: 20px;
+  }
+  
+  .scrollbar-theme::-webkit-scrollbar-corner {
+    background: #f1f1f1;
   }
 }

@@ -7,9 +7,9 @@ import { Outlet } from "react-router-dom";
 
 const SharedLayout = () => {
   return (
-    <div className="App card">
+      <div className="App card bg-[#F0EEF6]">
       <Header />
-      <div className="grid w-full">
+      <div className="grid w-full mt-[5rem] ">
         <Menubar />
         <Outlet />
         <SuggestedUsers />

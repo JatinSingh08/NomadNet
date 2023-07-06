@@ -1,16 +1,12 @@
 .App {
   text-align: center;
-  height: 100vh;
+  height: 100%;
+  /* background-color: #F0EEF6; */
+  /* background-color:#F8F9FA; */
+
   /* position: relative; */
 }
-.layout {
-  /* position: relative; */
-  /* display: grid;
-  grid-template-columns: 1fr 3fr 1fr; */
-}
-.header { 
-  /* z-index: 50; */
-}
+
 .shadow { 
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }

@@ -10,8 +10,8 @@ const LoginForm = () => {
   const { encodedToken, loggingIn } = useSelector(authSelector);
 
   const guestUserDetails = {
-    username: "jatinsingh@gmail.com",
-    password: "jatinsingh",
+    username: "john123",
+    password: "john123",
   };
   const [userDetails, setUserDetails] = useState({
     username: "",

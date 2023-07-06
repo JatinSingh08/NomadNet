@@ -12,12 +12,10 @@ const Users = () => {
   }, []);
 
   return (
-    <div className="flex gap-2  overflow-auto hide-scrollbar transition-all duration-300 ease-linear p-2">
-      <div className="flex space-x-2">
+    <div className="flex flex-col p-2 gap-4 ">
         {usersData?.map((user) => (
           <UserCard userData={user} key={user._id} />
         ))}
-      </div>
     </div>
   );
 };

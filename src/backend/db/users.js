@@ -1,6 +1,12 @@
 // import { v4 as uuid } from "uuid";
 // import { formatDate } from "../utils/authUtils";
-import { devangProfile, jatinProfile, swastikProfile, yashProfile } from "./assets";
+import { formatDate } from "../utils/authUtils";
+import {
+  devangProfile,
+  jatinProfile,
+  swastikProfile,
+  yashProfile,
+} from "./assets";
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -34,7 +40,7 @@ export const users = [
         firstName: "Swastik",
         lastName: "Patro",
         username: "not_just_sukunas_vessel",
-        profile: swastikProfile
+        profile: swastikProfile,
       },
     ],
     bookmarks: [],
@@ -66,7 +72,7 @@ export const users = [
         firstName: "Jatin",
         lastName: "Singh",
         username: "jatinsingh08",
-        profile: jatinProfile
+        profile: jatinProfile,
       },
     ],
     bookmarks: [],
@@ -98,7 +104,7 @@ export const users = [
         firstName: "Swastik",
         lastName: "Patro",
         username: "swastik123",
-        profile: swastikProfile
+        profile: swastikProfile,
       },
     ],
     bookmarks: [],
@@ -109,8 +115,8 @@ export const users = [
     lastName: "Rawat",
     username: "yash123",
     password: "yash123",
-    createdAt: "2023-04-10T10:38:12+05:30",
-    updatedAt: "2023-06-17T10:33:36+05:30",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
     email: "yash123@gmail.com",
     profile: yashProfile,
     portfolio: "https://sandhya-dev-7.netlify.app/",
@@ -130,20 +136,20 @@ export const users = [
         firstName: "Devang",
         lastName: "Mehra",
         username: "devang123",
-        profile: devangProfile
+        profile: devangProfile,
       },
     ],
     bookmarks: [],
   },
 
   {
-    _id: "4",
+    _id: "5",
     firstName: "Yash",
     lastName: "Rawat",
     username: "yash123",
     password: "yash123",
-    createdAt: "2023-04-10T10:38:12+05:30",
-    updatedAt: "2023-06-17T10:33:36+05:30",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
     email: "yash123@gmail.com",
     profile: yashProfile,
     portfolio: "https://sandhya-dev-7.netlify.app/",
@@ -163,21 +169,117 @@ export const users = [
         firstName: "Devang",
         lastName: "Mehra",
         username: "devang123",
-        profile: devangProfile
+        profile: devangProfile,
       },
     ],
     bookmarks: [],
   },
+  // {
+  //   _id: "4",
+  //   firstName: "Yash",
+  //   lastName: "Rawat",
+  //   username: "yash123",
+  //   password: "yash123",
+  //   createdAt: formatDate(),
+  //   updatedAt: formatDate(),
+  //   email: "yash123@gmail.com",
+  //   profile: yashProfile,
+  //   portfolio: "https://sandhya-dev-7.netlify.app/",
+  //   bio: "Don't Worry, I'm The Strongest",
+  //   followers: [
+  //     {
+  //       _id: "1",
+  //       firstName: "Jatin",
+  //       lastName: "Singh",
+  //       username: "jatinsingh08",
+  //       profile: jatinProfile,
+  //     },
+  //   ],
+  //   following: [
+  //     {
+  //       _id: "3",
+  //       firstName: "Devang",
+  //       lastName: "Mehra",
+  //       username: "devang123",
+  //       profile: devangProfile
+  //     },
+  //   ],
+  //   bookmarks: [],
+  // },
+  // {
+  //   _id: "4",
+  //   firstName: "Yash",
+  //   lastName: "Rawat",
+  //   username: "yash123",
+  //   password: "yash123",
+  //   createdAt: formatDate(),
+  //   updatedAt: formatDate(),
+  //   email: "yash123@gmail.com",
+  //   profile: yashProfile,
+  //   portfolio: "https://sandhya-dev-7.netlify.app/",
+  //   bio: "Don't Worry, I'm The Strongest",
+  //   followers: [
+  //     {
+  //       _id: "1",
+  //       firstName: "Jatin",
+  //       lastName: "Singh",
+  //       username: "jatinsingh08",
+  //       profile: jatinProfile,
+  //     },
+  //   ],
+  //   following: [
+  //     {
+  //       _id: "3",
+  //       firstName: "Devang",
+  //       lastName: "Mehra",
+  //       username: "devang123",
+  //       profile: devangProfile
+  //     },
+  //   ],
+  //   bookmarks: [],
+  // },
+  // {
+  //   _id: "4",
+  //   firstName: "Yash",
+  //   lastName: "Rawat",
+  //   username: "yash123",
+  //   password: "yash123",
+  //   createdAt: formatDate(),
+  //   updatedAt: formatDate(),
+  //   email: "yash123@gmail.com",
+  //   profile: yashProfile,
+  //   portfolio: "https://sandhya-dev-7.netlify.app/",
+  //   bio: "Don't Worry, I'm The Strongest",
+  //   followers: [
+  //     {
+  //       _id: "1",
+  //       firstName: "Jatin",
+  //       lastName: "Singh",
+  //       username: "jatinsingh08",
+  //       profile: jatinProfile,
+  //     },
+  //   ],
+  //   following: [
+  //     {
+  //       _id: "3",
+  //       firstName: "Devang",
+  //       lastName: "Mehra",
+  //       username: "devang123",
+  //       profile: devangProfile
+  //     },
+  //   ],
+  //   bookmarks: [],
+  // },
   {
-    _id: "4",
-    firstName: "Yash",
-    lastName: "Rawat",
-    username: "yash123",
-    password: "yash123",
-    createdAt: "2023-04-10T10:38:12+05:30",
-    updatedAt: "2023-06-17T10:33:36+05:30",
-    email: "yash123@gmail.com",
-    profile: yashProfile,
+    _id: "6",
+    firstName: "John",
+    lastName: "Doe",
+    username: "john123",
+    password: "john123",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    email: "john123@gmail.com",
+    profile: jatinProfile,
     portfolio: "https://sandhya-dev-7.netlify.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [
@@ -195,71 +297,7 @@ export const users = [
         firstName: "Devang",
         lastName: "Mehra",
         username: "devang123",
-        profile: devangProfile
-      },
-    ],
-    bookmarks: [],
-  },
-  {
-    _id: "4",
-    firstName: "Yash",
-    lastName: "Rawat",
-    username: "yash123",
-    password: "yash123",
-    createdAt: "2023-04-10T10:38:12+05:30",
-    updatedAt: "2023-06-17T10:33:36+05:30",
-    email: "yash123@gmail.com",
-    profile: yashProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
-    bio: "Don't Worry, I'm The Strongest",
-    followers: [
-      {
-        _id: "1",
-        firstName: "Jatin",
-        lastName: "Singh",
-        username: "jatinsingh08",
-        profile: jatinProfile,
-      },
-    ],
-    following: [
-      {
-        _id: "3",
-        firstName: "Devang",
-        lastName: "Mehra",
-        username: "devang123",
-        profile: devangProfile
-      },
-    ],
-    bookmarks: [],
-  },
-  {
-    _id: "4",
-    firstName: "Yash",
-    lastName: "Rawat",
-    username: "yash123",
-    password: "yash123",
-    createdAt: "2023-04-10T10:38:12+05:30",
-    updatedAt: "2023-06-17T10:33:36+05:30",
-    email: "yash123@gmail.com",
-    profile: yashProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
-    bio: "Don't Worry, I'm The Strongest",
-    followers: [
-      {
-        _id: "1",
-        firstName: "Jatin",
-        lastName: "Singh",
-        username: "jatinsingh08",
-        profile: jatinProfile,
-      },
-    ],
-    following: [
-      {
-        _id: "3",
-        firstName: "Devang",
-        lastName: "Mehra",
-        username: "devang123",
-        profile: devangProfile
+        profile: devangProfile,
       },
     ],
     bookmarks: [],
