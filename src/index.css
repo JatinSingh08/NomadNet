@@ -19,6 +19,9 @@
     @apply bg-violet-600
   }
 
+  .follow-btn {
+    @apply bg-[#6B4DE6] px-2 text-sm w-24 h-7 rounded-2xl text-slate-50
+  }
   .logo {
     font-family: 'Paytone One', sans-serif;
   }

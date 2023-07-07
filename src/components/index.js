@@ -6,6 +6,7 @@ export { default as CreatePost } from './Posts/CreatePost.jsx';
 export { default as PostsOrder } from './Posts/PostsOrder.jsx';
 
 export  { default as Users } from './Users/Users.jsx';
+export { default as UserProfileCard } from './Profile/UserProfileCard.jsx';
 
 export { default as Post } from './Posts/Post.jsx';
 

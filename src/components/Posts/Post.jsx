@@ -1,6 +1,6 @@
 import React from "react";
 import { IoEllipsisHorizontal } from "react-icons/io5";
-import { AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { AiOutlineShareAlt } from "react-icons/ai";
 import { BookmarkIcon } from "@heroicons/react/24/outline";
 
 import { FaRegCommentDots } from "react-icons/fa";
@@ -9,7 +9,6 @@ import { bookmarkPost, removeBookmarkPost, userSelector } from "../../features/u
 import {
   dislikePost,
   likePost,
-  postsSelector,
 } from "../../features/postsSlice";
 import { authSelector } from "../../features/authSlice";
 import { getIsBookmarkedByUser, getIsLikedByUser } from "../../utils/postsHelper";
@@ -20,22 +19,17 @@ const Post = ({ postData }) => {
   const { usersData } = useSelector(userSelector);
   const likedByUser = getIsLikedByUser(postData, foundUser?.username);
   const bookmarkedByUser = getIsBookmarkedByUser(usersData, postData?._id, foundUser?.username);
-  const {
-    _id: postId,
-    firstName,
-    lastName,
-    content,
-    likes: { likeCount },
-    comments,
-    userId,
-  } = postData;
-  const userDetails = usersData?.find((user) => userId === user._id);
+  // const {
+  //   _id: postId,
+  //   firstName,
+  //   lastName,
+  //   content,
+  //   likes: { likeCount },
+  //   comments,
+  //   userId,
+  // } = postData;
+  const userDetails = usersData?.find((user) => postData?.userId === user._id);
 
-
-  console.log("users List", usersData);
-  console.log("found user", foundUser);
-  console.log("encodedToken", encodedToken);
-  console.log("liked by user", likedByUser);
   return (
     <div className=" card p-5 rounded-xl">
       <div className="flex justify-between">
@@ -46,14 +40,14 @@ const Post = ({ postData }) => {
             className="w-16 h-16 rounded-full object-contain"
           />
           <div className="flex-col gap-2 text-start">
-            <p>{firstName + " " + lastName}</p>
-            <p>Thu June 29 2023</p>
+            <p>{postData?.firstName + " " + postData?.lastName}</p>
+            <p>{postData?.createdAt}</p>
           </div>
         </div>
         <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
       </div>
       <div className="text-start px-8">
-        <div className="mt-6">{content}</div>
+        <div className="mt-6">{postData?.content}</div>
         <div className="flex justify-between items-center mt-6">
           <div className="flex items-start  justify-start gap-6 text-2xl ">
             <button
@@ -61,9 +55,9 @@ const Post = ({ postData }) => {
               // disabled={disabled.likeDisabled}
               onClick={() => {
                 if (likedByUser) {
-                  dispatch(dislikePost({ encodedToken, postId }));
+                  dispatch(dislikePost({ encodedToken, postId: postData?._id }));
                 } else {
-                  dispatch(likePost({ encodedToken, postId }));
+                  dispatch(likePost({ encodedToken, postId: postData?._id }));
                 }
               }}
             >
@@ -83,12 +77,12 @@ const Post = ({ postData }) => {
                 />
               </svg>
 
-              <p className="text-sm">{likeCount}</p>
+              <p className="text-sm">{postData?.likes?.likeCount}</p>
             </button>
 
             <span className="flex items-center justify-center gap-1">
               <FaRegCommentDots className="cursor-pointer" />
-              <p className="text-sm">{comments?.length}</p>
+              <p className="text-sm">{postData?.comments?.length}</p>
             </span>
             <AiOutlineShareAlt className="cursor-pointer" />
           </div>
@@ -97,10 +91,10 @@ const Post = ({ postData }) => {
             let username = foundUser?.username;
             if(bookmarkedByUser) {
               console.log('removing from bookmark');
-              dispatch(removeBookmarkPost({ encodedToken, postId, username }))
+              dispatch(removeBookmarkPost({ encodedToken, postId: postData?._id, username }))
             } else {
               console.log('added to bookmark');
-              dispatch(bookmarkPost({ encodedToken, postId, username}));
+              dispatch(bookmarkPost({ encodedToken, postId: postData?._id, username}));
             }
           }}
           >

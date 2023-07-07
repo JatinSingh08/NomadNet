@@ -7,7 +7,7 @@ const SuggestedUsers = () => {
       <div className="text-[#9E98B3] text-xl font-bold">
         You may Know
       </div>
-      <div className="card py-2 h-80 px-2 overflow-y-scroll scrollbar-theme rounded-2xl mt-2">
+      <div className="card py-2 h-auto w-[284px] px-2 overflow-y-scroll scrollbar-theme rounded-2xl mt-2">
         <Users />
       </div>
     </div>

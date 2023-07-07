@@ -6,12 +6,13 @@ import { AiFillHeart } from 'react-icons/ai'
 import { HiLogout } from 'react-icons/hi'
 import { CgProfile } from 'react-icons/cg'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { logoutUser } from '../../features/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { authSelector, logoutUser } from '../../features/authSlice'
 
 const Menubar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { foundUser } = useSelector(authSelector);
 
   const logoutUserHandler = () => {
     dispatch(logoutUser());
@@ -32,11 +33,7 @@ const Menubar = () => {
             <BsFillBookmarksFill className=' text-[#9E98B3] w-5 h-5'/>
             <span>Bookmarks</span>
           </Link>
-          <Link className='flex gap-6 items-center hover:cursor-pointer' to='/liked'>
-            <AiFillHeart className=' text-[#9E98B3] w-6 h-6'/>
-            <span>Liked Posts</span>
-          </Link>
-          <Link className='flex gap-6 items-center hover:cursor-pointer' to='/profile/1'>
+          <Link className='flex gap-6 items-center hover:cursor-pointer' to={`/profile/${foundUser.username}`}>
             <CgProfile className=' text-[#9E98B3] w-6 h-6'/>
             <span>Profile</span>
           </Link>

@@ -20,7 +20,14 @@ const CreatePost = () => {
   const dispatch = useDispatch();
 
   const createPostHandler = () => { 
-    dispatch(createNewPost({encodedToken, postData}));
+    if(postData.content.trim().length > 0 || postData.postMedia) {
+      dispatch(createNewPost({encodedToken, postData}));
+      setPostData({
+        ...postData,
+        content: '',
+        postMedia: ''
+      })
+    }
   }
   
   useEffect(() => {
@@ -42,18 +49,19 @@ const CreatePost = () => {
   }, []);
 
   return (
-    <div className=" card rounded-2xl p-4">
+    <div className="card rounded-2xl p-4">
       <h1 className="text-start border-b-2 text-xl">Create Post</h1>
       <div className="border-b-2 mt-4 flex py-4">
         <img
           src={foundUser?.profile}
-          alt=""
+          alt="vatar"
           className="w-16 h-16 rounded-full object-contain"
         />
         <textarea
           placeholder="What is happening?!"
           className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
           onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
+          value={postData.content}
         ></textarea>
       </div>
 
@@ -82,9 +90,10 @@ const CreatePost = () => {
             {showEmojiPicker && <EmojiPicker height="400px" />}
           </div>
         </div>
-        <button className="button text-slate-100 text-lg rounded-lg shadow-lg px-8 py-1 font-semibold"
+        <button className="button text-slate-50 text-sm rounded-2xl shadow-lg px-2 py-1 h-8 w-24 active:scale-90 transition-all duration-100 ease-in-out "
         onClick={createPostHandler}
-        >
+        > 
+        {/* px-2 text-sm w-24 h-7 rounded-2xl text-slate-50 */}
           Post
         </button>
       </div>

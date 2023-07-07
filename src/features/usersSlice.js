@@ -44,7 +44,10 @@ export const followUser = createAsyncThunk(
           user: response.data.user,
         };
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error?.message);
+      return rejectWithValue(error?.message);
+    }
   }
 );
 
@@ -55,7 +58,7 @@ export const bookmarkPost = createAsyncThunk(
       const response = await bookmarksPostService(encodedToken, postId);
       if (response.status === 200 || response.status === 201) {
         let foundUser = null;
-        if (foundUser!== null && foundUser !==undefined ) {
+        if (foundUser!== null && foundUser !== undefined ) {
           foundUser = JSON.parse(localStorage.getItem("foundUser"));
           localStorage.setItem(
             "foundUser",
@@ -139,7 +142,27 @@ const usersSlice = createSlice({
       })
       .addCase(removeBookmarkPost.rejected, (state) => {
         state.disabled.bookmarkDisabled = false;
-      });
+      })
+      .addCase(followUser.pending, (state) => {
+        state.disabled.followDisabled = true;
+      })
+      .addCase(followUser.fulfilled, (state, action) => {
+        const { followUser, user } = action.payload;
+        const followUserIndex = state?.usersData?.findIndex(user => user._id === followUser._id);
+        const userIndex = state?.usersData?.findIndex(userObj => userObj._id === user._id);
+
+        if(followUser !== undefined) {
+          state.usersData[followUserIndex] = followUser;
+        }
+        if(userIndex !== undefined ) {
+          state.usersData[userIndex] = user;
+          localStorage.setItem("foundUser", JSON.stringify(user));
+        }
+        state.disabled.followDisabled = false;
+      })
+      .addCase(followUser.rejected, (state) => {
+        state.disabled.followDisabled = false;
+      })
   },
 });
 
