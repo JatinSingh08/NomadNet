@@ -18,7 +18,7 @@ const contentRoutes = [
     element: <UserProfile />
   },
   {
-    pah: '/post/:postId',
+    path: '/post/:postId',
     element: <PostDetails />
   }, 
   

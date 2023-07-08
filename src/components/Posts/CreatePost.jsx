@@ -70,7 +70,7 @@ const CreatePost = () => {
           <input type="file" className="hidden" id="fileInput" />
           <label htmlFor="fileInput" className="cursor-pointer">
             <span>
-              <BsFillCameraFill className="w-7 h-7" />
+              <BsFillCameraFill className="w-7 h-7 icon-theme" />
             </span>
           </label>
 
@@ -78,6 +78,7 @@ const CreatePost = () => {
           <span
             ref={emojiIconRef}
             onClick={() => setEmojiPicker((val) => !val)}
+            className="icon-theme"
           >
             <BsFillEmojiSmileFill className="w-6 h-6 hover:cursor-pointer" />
           </span>
@@ -87,10 +88,10 @@ const CreatePost = () => {
             }`}
             ref={emojiPickerRef}
           >
-            {showEmojiPicker && <EmojiPicker height="400px" />}
+            {showEmojiPicker && <EmojiPicker height="400px" onEmojiClick={e => setPostData(val => ({...val, content: val.content + e.emoji}))} />}
           </div>
         </div>
-        <button className="button text-slate-50 text-sm rounded-2xl shadow-lg px-2 py-1 h-8 w-24 active:scale-90 transition-all duration-100 ease-in-out "
+        <button className="button-theme h-8 rounded-2xl"
         onClick={createPostHandler}
         > 
         {/* px-2 text-sm w-24 h-7 rounded-2xl text-slate-50 */}

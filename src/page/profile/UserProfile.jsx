@@ -17,6 +17,7 @@ const UserProfile = () => {
   return (
     <div className="px-20 py-10 flex flex-col gap-8  w-[calc(100%-46rem)] min-h-screen  ml-[22rem]">
       <UserProfileCard 
+      usersData={usersData}
       user={user}
       />
       {

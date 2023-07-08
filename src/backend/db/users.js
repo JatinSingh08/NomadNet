@@ -4,6 +4,7 @@ import { formatDate } from "../utils/authUtils";
 import {
   devangProfile,
   jatinProfile,
+  johnProfile,
   swastikProfile,
   yashProfile,
 } from "./assets";
@@ -247,7 +248,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     email: "john123@gmail.com",
-    profile: jatinProfile,
+    profile: johnProfile,
     portfolio: "https://sandhya-dev-7.netlify.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [

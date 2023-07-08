@@ -4,6 +4,7 @@ import {
   followUserService,
   getAllUsersService,
   removeBookmarkedPostService,
+  unfollowUserService,
 } from "../services/apiServices";
 
 const initialState = {
@@ -50,6 +51,24 @@ export const followUser = createAsyncThunk(
     }
   }
 );
+
+export const unfollowUser = createAsyncThunk(
+  "users/unfollowUser",
+  async ({ encodedToken, unfollowUserId}, { rejectWithValue }) => {
+    try {
+      const response = await unfollowUserService(encodedToken, unfollowUserId);
+      if( response.status === 200 || response.status === 201) {
+        return {
+          followUser: response.data.followUser,
+          user: response.data.user
+        }
+      }
+    } catch (error) {
+      console.log(error?.message);
+      return rejectWithValue(error?.message);
+    }
+  }
+)
 
 export const bookmarkPost = createAsyncThunk(
   "users/bookmarkPost",
@@ -151,7 +170,7 @@ const usersSlice = createSlice({
         const followUserIndex = state?.usersData?.findIndex(user => user._id === followUser._id);
         const userIndex = state?.usersData?.findIndex(userObj => userObj._id === user._id);
 
-        if(followUser !== undefined) {
+        if(followUserIndex !== undefined) {
           state.usersData[followUserIndex] = followUser;
         }
         if(userIndex !== undefined ) {
@@ -161,6 +180,26 @@ const usersSlice = createSlice({
         state.disabled.followDisabled = false;
       })
       .addCase(followUser.rejected, (state) => {
+        state.disabled.followDisabled = false;
+      })
+      .addCase(unfollowUser.pending, (state) => {
+        state.disabled.followDisabled = true;
+      })
+      .addCase(unfollowUser.fulfilled, (state, action) => {
+        const { followUser, user } = action.payload;
+        const unfollowUserIndex = state?.usersData?.findIndex( user => user._id === followUser._id);
+        const userIndex = state?.usersData?.findIndex(userObj => userObj._id === user._id);
+
+        if(unfollowUserIndex !== undefined) {
+          state.usersData[unfollowUserIndex] = followUser;
+        }
+        if(userIndex !== undefined) {
+          state.usersData[userIndex] = user;
+          localStorage.setItem("foundUser", JSON.stringify(user))
+        }
+        state.disabled.followDisabled = false;
+      })
+      .addCase(unfollowUser.rejected, (state) => {
         state.disabled.followDisabled = false;
       })
   },

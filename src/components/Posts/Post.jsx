@@ -5,29 +5,30 @@ import { BookmarkIcon } from "@heroicons/react/24/outline";
 
 import { FaRegCommentDots } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { bookmarkPost, removeBookmarkPost, userSelector } from "../../features/usersSlice";
 import {
-  dislikePost,
-  likePost,
-} from "../../features/postsSlice";
+  bookmarkPost,
+  removeBookmarkPost,
+  userSelector,
+} from "../../features/usersSlice";
+import { dislikePost, likePost } from "../../features/postsSlice";
 import { authSelector } from "../../features/authSlice";
-import { getIsBookmarkedByUser, getIsLikedByUser } from "../../utils/postsHelper";
+import {
+  getIsBookmarkedByUser,
+  getIsLikedByUser,
+} from "../../utils/postsHelper";
+import { useNavigate } from "react-router-dom";
 
-const Post = ({ postData }) => {
+const Post = ({ postData, showComments }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { encodedToken, foundUser } = useSelector(authSelector);
   const { usersData } = useSelector(userSelector);
   const likedByUser = getIsLikedByUser(postData, foundUser?.username);
-  const bookmarkedByUser = getIsBookmarkedByUser(usersData, postData?._id, foundUser?.username);
-  // const {
-  //   _id: postId,
-  //   firstName,
-  //   lastName,
-  //   content,
-  //   likes: { likeCount },
-  //   comments,
-  //   userId,
-  // } = postData;
+  const bookmarkedByUser = getIsBookmarkedByUser(
+    usersData,
+    postData?._id,
+    foundUser?.username
+  );
   const userDetails = usersData?.find((user) => postData?.userId === user._id);
 
   return (
@@ -37,7 +38,7 @@ const Post = ({ postData }) => {
           <img
             src={userDetails?.profile}
             alt=""
-            className="w-16 h-16 rounded-full object-contain"
+            className="w-12 h-12 rounded-full object-contain"
           />
           <div className="flex-col gap-2 text-start">
             <p>{postData?.firstName + " " + postData?.lastName}</p>
@@ -51,11 +52,13 @@ const Post = ({ postData }) => {
         <div className="flex justify-between items-center mt-6">
           <div className="flex items-start  justify-start gap-6 text-2xl ">
             <button
-              className={`flex items-center justify-center gap-1 `}
+              className={`flex items-center justify-center gap-1 icon-theme`}
               // disabled={disabled.likeDisabled}
               onClick={() => {
                 if (likedByUser) {
-                  dispatch(dislikePost({ encodedToken, postId: postData?._id }));
+                  dispatch(
+                    dislikePost({ encodedToken, postId: postData?._id })
+                  );
                 } else {
                   dispatch(likePost({ encodedToken, postId: postData?._id }));
                 }
@@ -80,29 +83,73 @@ const Post = ({ postData }) => {
               <p className="text-sm">{postData?.likes?.likeCount}</p>
             </button>
 
-            <span className="flex items-center justify-center gap-1">
+            <span
+              className="flex items-center justify-center gap-1 icon-theme"
+              onClick={() => navigate(`/post/${postData?._id}`)}
+            >
               <FaRegCommentDots className="cursor-pointer" />
               <p className="text-sm">{postData?.comments?.length}</p>
             </span>
-            <AiOutlineShareAlt className="cursor-pointer" />
+            <AiOutlineShareAlt className="cursor-pointer icon-theme" />
           </div>
-          <div 
-          onClick={() => {
-            let username = foundUser?.username;
-            if(bookmarkedByUser) {
-              console.log('removing from bookmark');
-              dispatch(removeBookmarkPost({ encodedToken, postId: postData?._id, username }))
-            } else {
-              console.log('added to bookmark');
-              dispatch(bookmarkPost({ encodedToken, postId: postData?._id, username}));
-            }
-          }}
+          <div
+            onClick={() => {
+              let username = foundUser?.username;
+              if (bookmarkedByUser) {
+                console.log("removing from bookmark");
+                dispatch(
+                  removeBookmarkPost({
+                    encodedToken,
+                    postId: postData?._id,
+                    username,
+                  })
+                );
+              } else {
+                console.log("added to bookmark");
+                dispatch(
+                  bookmarkPost({
+                    encodedToken,
+                    postId: postData?._id,
+                    username,
+                  })
+                );
+              }
+            }}
           >
-            <BookmarkIcon className="w-6 h-6 cursor-pointer" fill={`${bookmarkedByUser ? "black" : "transparent"}`}/>
+            <BookmarkIcon
+              className="w-6 h-6 cursor-pointer icon-theme"
+              fill={`${bookmarkedByUser ? "black" : "transparent"}`}
+            />
           </div>
         </div>
       </div>
-      <div></div>
+      {showComments && (
+        <div className="mt-6 flex flex-col gap-4">
+          <div className="flex gap-1">
+            <img
+              src={foundUser?.profile}
+              alt="avatar"
+              className="w-12 h-12 rounded-full object-contain"
+            />
+            <div className="flex flex-col text-start justify-end">
+              <h1 className="font-semibold text-[16px]">
+                {foundUser?.firstName + " " + foundUser?.lastName}
+              </h1>
+              <p className="text-[12px] text-[#A6A0B9] -mt-1.5">
+                @{foundUser?.username}
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-4 items-center justify-center">
+            <textarea
+            placeholder="comment here"
+            className="w-full px-4 bg-rose-50 rounded-lg outline-none pt-2 resize-none outline-violet-200"
+            // onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
+          ></textarea>
+          <button className="button-theme rounded-2xl h-8">Reply</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ export const jatinProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v
 export const swastikProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688468827/swastik-profile_ekouin.jpg';
 export const devangProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688468827/devang-profile_jvxfur.jpg';
 export const yashProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688468827/yash-profile_spfv2n.jpg';
+export const johnProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688762755/JohnDoeProfile_w90pc6.jpg';
 
 // Posts
 

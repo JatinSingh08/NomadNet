@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { followUser } from '../../features/usersSlice';
+import { followUser, userSelector } from '../../features/usersSlice';
 import { authSelector } from '../../features/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const UserCard = ({ userData }) => {
   const dispatch = useDispatch();
   const { encodedToken } = useSelector(authSelector);
+  const { disabled: {followDisabled}} = useSelector(userSelector);
   const followUserId = userData?._id;
   const navigate = useNavigate();
 
@@ -22,7 +23,8 @@ const UserCard = ({ userData }) => {
         <p className='text-[12px] text-[#A6A0B9]'>@{userData?.username}</p>
       </div>
      </div>
-     <button className='follow-btn'
+     <button className='button-theme h-7 rounded-2xl'
+     disabled={followDisabled}
      onClick={() => {
       dispatch(followUser({encodedToken, followUserId}))
      }}

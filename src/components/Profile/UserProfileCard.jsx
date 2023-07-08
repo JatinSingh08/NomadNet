@@ -1,6 +1,18 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { authSelector } from '../../features/authSlice';
+import { followUser, unfollowUser } from '../../features/usersSlice';
 
-const UserProfileCard = ({user}) => {
+const UserProfileCard = ({user, usersData}) => {
+  const { encodedToken, foundUser } = useSelector(authSelector);
+
+  const dispatch = useDispatch(); 
+  
+  const currentUser = usersData?.find(user => user.username === foundUser.username);
+  console.log({currentUser})
+
+  const isFollowed = currentUser?.following?.find(followedUser => followedUser._id === user._id);
+  console.log({isFollowed})
 
   console.log({user});
   return (
@@ -17,7 +29,15 @@ const UserProfileCard = ({user}) => {
           <p>Frontend Developer</p>
           <a href="https://sneakhead.vercel.app/" className='text-blue-400 text-sm'>https://sneakhead.vercel.app/</a>
         </div>
-        <button className='follow-btn'>Follow</button>
+        <button className='follow-btn'
+        onClick={() => {
+          if(isFollowed) {
+            dispatch(unfollowUser({encodedToken, unfollowUserId: user?._id}))
+          } else {
+            dispatch(followUser({encodedToken, followUserId: user?._id}))
+          }
+        }}
+        >{ isFollowed ? 'Following' : 'Follow'}</button>
       </div>
       <div className='flex gap-2'>
         <div className='flex gap-1'>

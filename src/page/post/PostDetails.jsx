@@ -1,9 +1,19 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'
+import { postsSelector } from '../../features/postsSlice';
+import { Post } from '../../components';
 
 const PostDetails = () => {
+  const { postId } = useParams();
+  const { postsData } = useSelector(postsSelector);
+  const postData = postsData?.find(post => post._id === postId);
   return (
-    <div>
-      This is Post Details page.
+    <div className="px-20 py-10 flex flex-col gap-8  w-[calc(100%-46rem)] min-h-screen  ml-[22rem]"> 
+      <Post 
+      postData={postData}
+      showComments
+      />
     </div>
   )
 }

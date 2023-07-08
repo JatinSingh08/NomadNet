@@ -49,7 +49,7 @@ const SignupForm = () => {
         <div className="w-96  m-auto mt-24 md:mt-44 h-auto p-4 border rounded-md drop-shadow-sm flex flex-col gap-3">
           <div className="flex items-center justify-center m-auto">
             <img src={Logo} alt="logo" />
-            <h1 className=" text-[#60A5FA] text-3xl logo">SocialSphere</h1>
+            <h1 className=" text-[#60A5FA] text-3xl font-bold">NomadNet</h1>
           </div>
           <div className="flex gap-0.5">
             <div className="flex flex-col gap-1 w-[50%]">

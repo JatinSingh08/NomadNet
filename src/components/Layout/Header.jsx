@@ -10,12 +10,12 @@ const Header = () => {
   return (
     <div className="flex  items-center justify-between px-[160px] bg-white h-20 fixed left-0 right-0 top-0 z-50">
       <div
-        className="text-2xl font-semibold flex items-center justify-center  text-violet-500 italic hover:cursor-pointer"
+        className="flex items-center justify-center hover:cursor-pointer"
         onClick={() => navigate("/")}
       >
         <img src={Logo} alt="SocialSphere" />
 
-        <h1 className=" text-[#60A5FA] text-3xl logo">SocialSphere</h1>
+        <h1 className=" text-[#8154ea] text-3xl font-bold">NomadNet</h1>
       </div>
       <form class={`flex items-center`}>
         <div className={`relative w-96`}>
@@ -46,8 +46,9 @@ const Header = () => {
         <BsMoonStars className="w-7 h-7 hover:cursor-pointer" fill="#5EBBFF" />
         <img
           src={foundUser?.profile}
-          alt=""
-          className="w-14 h-14 rounded-full  object-contain"
+          alt="avatar"
+          className="w-14 h-14 rounded-full  object-contain cursor-pointer"
+          onClick={() => navigate(`/profile/${foundUser?.username}`)}
         />
       </div>
     </div>
