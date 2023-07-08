@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { BsFillCameraFill, BsFillEmojiSmileFill } from "react-icons/bs";
 import EmojiPicker from "emoji-picker-react";
+import React, { useEffect, useRef, useState } from "react";
+import { BsFillCameraFill, BsFillEmojiSmileFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../../features/authSlice";
 import { createNewPost } from "../../features/postsSlice";
@@ -14,22 +14,22 @@ const CreatePost = () => {
     firstName: foundUser?.firstName,
     lastName: foundUser?.lastName,
     userId: foundUser?._id,
-    content: '',
-    postMedia: ''
+    content: "",
+    postMedia: "",
   });
   const dispatch = useDispatch();
 
-  const createPostHandler = () => { 
-    if(postData.content.trim().length > 0 || postData.postMedia) {
-      dispatch(createNewPost({encodedToken, postData}));
+  const createPostHandler = () => {
+    if (postData.content.trim().length > 0 || postData.postMedia) {
+      dispatch(createNewPost({ encodedToken, postData }));
       setPostData({
         ...postData,
-        content: '',
-        postMedia: ''
-      })
+        content: "",
+        postMedia: "",
+      });
     }
-  }
-  
+  };
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -60,7 +60,9 @@ const CreatePost = () => {
         <textarea
           placeholder="What is happening?!"
           className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
-          onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
+          onChange={(e) =>
+            setPostData((val) => ({ ...val, content: e.target.value }))
+          }
           value={postData.content}
         ></textarea>
       </div>
@@ -88,13 +90,24 @@ const CreatePost = () => {
             }`}
             ref={emojiPickerRef}
           >
-            {showEmojiPicker && <EmojiPicker height="400px" onEmojiClick={e => setPostData(val => ({...val, content: val.content + e.emoji}))} />}
+            {showEmojiPicker && (
+              <EmojiPicker
+                height="400px"
+                onEmojiClick={(e) =>
+                  setPostData((val) => ({
+                    ...val,
+                    content: val.content + e.emoji,
+                  }))
+                }
+              />
+            )}
           </div>
         </div>
-        <button className="button-theme h-8 rounded-2xl"
-        onClick={createPostHandler}
-        > 
-        {/* px-2 text-sm w-24 h-7 rounded-2xl text-slate-50 */}
+        <button
+          className="button-theme h-8 rounded-2xl"
+          onClick={createPostHandler}
+        >
+          {/* px-2 text-sm w-24 h-7 rounded-2xl text-slate-50 */}
           Post
         </button>
       </div>

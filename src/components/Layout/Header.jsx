@@ -1,8 +1,8 @@
 import React from "react";
-import { Logo, profileImage } from "../../assets";
 import { BsMoonStars } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Logo } from "../../assets";
 import { authSelector } from "../../features/authSlice";
 const Header = () => {
   const navigate = useNavigate();

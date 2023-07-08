@@ -1,22 +1,21 @@
-import React from "react";
-import { IoEllipsisHorizontal } from "react-icons/io5";
-import { AiOutlineShareAlt } from "react-icons/ai";
 import { BookmarkIcon } from "@heroicons/react/24/outline";
-
+import React from "react";
+import { AiOutlineShareAlt } from "react-icons/ai";
+import { IoEllipsisHorizontal } from "react-icons/io5";
 import { FaRegCommentDots } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authSelector } from "../../features/authSlice";
+import { dislikePost, likePost } from "../../features/postsSlice";
 import {
   bookmarkPost,
   removeBookmarkPost,
   userSelector,
 } from "../../features/usersSlice";
-import { dislikePost, likePost } from "../../features/postsSlice";
-import { authSelector } from "../../features/authSlice";
 import {
   getIsBookmarkedByUser,
   getIsLikedByUser,
 } from "../../utils/postsHelper";
-import { useNavigate } from "react-router-dom";
 
 const Post = ({ postData, showComments }) => {
   const dispatch = useDispatch();
@@ -64,7 +63,6 @@ const Post = ({ postData, showComments }) => {
                 }
               }}
             >
-              {/* <HeartIcon className="hover:cursor-pointer" /> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill={likedByUser ? "red" : "transparent"}
@@ -142,11 +140,11 @@ const Post = ({ postData, showComments }) => {
           </div>
           <div className="flex gap-4 items-center justify-center">
             <textarea
-            placeholder="comment here"
-            className="w-full px-4 bg-rose-50 rounded-lg outline-none pt-2 resize-none outline-violet-200"
-            // onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
-          ></textarea>
-          <button className="button-theme rounded-2xl h-8">Reply</button>
+              placeholder="comment here"
+              className="w-full px-4 bg-rose-50 rounded-lg outline-none pt-2 resize-none outline-violet-200"
+              // onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
+            ></textarea>
+            <button className="button-theme rounded-2xl h-8">Reply</button>
           </div>
         </div>
       )}

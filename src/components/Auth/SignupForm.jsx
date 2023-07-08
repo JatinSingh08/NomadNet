@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../assets";
-import { useDispatch, useSelector } from "react-redux";
 import { authSelector, logoutUser, userSignup } from "../../features/authSlice";
 
 const SignupForm = () => {
@@ -40,8 +40,8 @@ const SignupForm = () => {
 
   console.log("fromSignupForm", encodedToken);
   useEffect(() => {
-    if(encodedToken) navigate("/");
-  } ,[encodedToken]);
+    if (encodedToken) navigate("/");
+  }, [encodedToken]);
 
   return (
     <>

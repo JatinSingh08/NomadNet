@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 /* @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300&family=Paytone+One&family=Playfair+Display&display=swap'); */
 
 /* @import url('https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Figtree:wght@300&family=Paytone+One&family=Playfair+Display&display=swap'); */
@@ -13,25 +13,25 @@
     margin: 0;
     padding: 0;
     /* font-family: 'Playfair Display', serif; */
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
   .icon-theme {
-    @apply active:scale-90 transition-all duration-100 ease-in-out
+    @apply active:scale-90 transition-all duration-100 ease-in-out;
   }
 
   .button-theme {
-    @apply text-slate-50 bg-[#6B4DE6] hover:bg-[#5834eb] hover:duration-300 hover:ease-in-out hover:transition-all text-sm w-24 flex items-center justify-center shadow-2xl px-2 py-1 active:scale-90 transition-all duration-100 ease-in-out
+    @apply text-slate-50 bg-[#6B4DE6] hover:bg-[#5834eb] hover:duration-300 hover:ease-in-out hover:transition-all text-sm w-24 flex items-center justify-center shadow-2xl px-2 py-1 active:scale-90 transition-all duration-100 ease-in-out;
   }
 
   .follow-btn {
-    @apply bg-[#6B4DE6] px-2 text-sm w-24 h-7 rounded-2xl text-slate-50
+    @apply bg-[#6B4DE6] px-2 text-sm w-24 h-7 rounded-2xl text-slate-50;
   }
   .logo {
-    font-family: 'Paytone One', sans-serif;
+    font-family: "Paytone One", sans-serif;
   }
   .card {
     /* opacity: 1; */
-    background-color: rgb(255 255 255/var(--tw-bg-opacity));
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
 
   /* button */
@@ -59,7 +59,7 @@
     background: #9767ff;
     border-radius: 20px;
   }
-  
+
   .scrollbar-theme::-webkit-scrollbar-corner {
     background: #f1f1f1;
   }

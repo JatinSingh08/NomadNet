@@ -1,13 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Menubar from "./Menubar";
-import { Home } from "../../page";
 import SuggestedUsers from "./SuggestedUsers";
-import { Outlet } from "react-router-dom";
 
 const SharedLayout = () => {
   return (
-      <div className="App card bg-[#F0EEF6] h-[100vh]">
+    <div className="App card bg-[#F0EEF6] h-[100vh]">
       <Header />
       <div className="grid w-full mt-[5rem] ">
         <Menubar />
