@@ -46,8 +46,8 @@ export const posts = [
     username: "swastik123",
     firstName: "Swastik",
     lastName: "Patro",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-03-12T10:38:12+01:30",
+    updatedAt: "2023-03-12T10:38:12+01:30",
     userId: "2",
   },
   {
@@ -88,8 +88,8 @@ export const posts = [
     username: "devang123",
     firstName: "Devang",
     lastName: "Mehra",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-01-01T10:38:12+12:01",
+    updatedAt: "2023-01-01T10:38:12+12:01",
     userId: "3",
   },
   {
@@ -130,13 +130,14 @@ export const posts = [
     username: "yash123",
     firstName: "Yash",
     lastName: "Rawat",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-07-04T10:38:12+03:30",
+    updatedAt: "2023-07-04T10:38:12+03:30",
     userId: "4",
   },
   {
     _id: "4",
-    content: "Starting corporate life from today. Excited, nervous and everything in between 🤞",
+    content:
+      "Starting corporate life from today. Excited, nervous and everything in between 🤞",
     postMedia: swastikPosts[1],
     likes: {
       likeCount: 10,
@@ -172,13 +173,14 @@ export const posts = [
     username: "mathues123",
     firstName: "Mathues",
     lastName: "Ferraro",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2022-12-08T10:38:12+02:30",
+    updatedAt: "2022-12-08T10:38:12+02:30",
     userId: "10",
   },
   {
     _id: "5",
-    content: "Sitting at the airport on the way home, I'm reflecting on what an incredible week it's been",
+    content:
+      "Sitting at the airport on the way home, I'm reflecting on what an incredible week it's been",
     postMedia: swastikPosts[1],
     likes: {
       likeCount: 6,
@@ -214,13 +216,14 @@ export const posts = [
     username: "slav123",
     firstName: "Slav",
     lastName: "Romanav",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-05-24T10:38:12+12:30",
+    updatedAt: "2023-05-24T10:38:12+12:30",
     userId: "9",
   },
   {
     _id: "6",
-    content: "active learning & productive failure >>>>>>> copying things from the internet",
+    content:
+      "active learning & productive failure >>>>>>> copying things from the internet",
     postMedia: swastikPosts[1],
     likes: {
       likeCount: 15,
@@ -256,13 +259,14 @@ export const posts = [
     username: "albert123",
     firstName: "Albert",
     lastName: "Dera",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-02-11T10:38:12+06:27",
+    updatedAt: "2023-02-11T10:38:12+06:27",
     userId: "8",
   },
   {
     _id: "7",
-    content: "I just realized some of my biggest childhood inspirations have followed me here ✨ Don't even know how to react, this feels surreal. Just want to say thank you and I will not disappoint, new side projects coming soon :)",
+    content:
+      "I just realized some of my biggest childhood inspirations have followed me here ✨ Don't even know how to react, this feels surreal. Just want to say thank you and I will not disappoint, new side projects coming soon :)",
     postMedia: swastikPosts[1],
     likes: {
       likeCount: 25,
@@ -298,13 +302,14 @@ export const posts = [
     username: "joseph123",
     firstName: "Joseph",
     lastName: "Gonzalez",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-07-10T10:38:12+11:05",
+    updatedAt: "2023-07-10T10:38:12+11:05",
     userId: "7",
   },
   {
     _id: "8",
-    content: "There are 4 people in my neighborhood that drive Lambos. Every single one of them is a PHP developer.",
+    content:
+      "There are 4 people in my neighborhood that drive Lambos. Every single one of them is a PHP developer.",
     postMedia: swastikPosts[1],
     likes: {
       likeCount: 16,
@@ -340,13 +345,14 @@ export const posts = [
     username: "jurica123",
     firstName: "Jurica",
     lastName: "Koletic",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-07-05T10:38:12+04:25",
+    updatedAt: "2023-07-05T10:38:12+05:25",
     userId: "6",
   },
   {
     _id: "9",
-    content: "There are 4 people in my neighborhood that drive Lambos. Every single one of them is a PHP developer.",
+    content:
+      "There are 4 people in my neighborhood that drive Lambos. Every single one of them is a PHP developer.",
     postMedia: swastikPosts[1],
     likes: {
       likeCount: 16,
@@ -382,9 +388,8 @@ export const posts = [
     username: "john123",
     firstName: "John",
     lastName: "Doe",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: "2023-06-11T10:38:12+06:30",
+    updatedAt: "2023-06-11T10:38:12+06:30",
     userId: "5",
   },
-  
 ];

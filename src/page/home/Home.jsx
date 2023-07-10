@@ -21,24 +21,24 @@ const Home = () => {
   const user = usersData?.find((user) => user?.username === foundUser?.username);
   const userFollowingPosts = postsData?.filter( post => post?.userId === user?._id || user?.following?.some(userData => userData._id === post.userId));
   
-  // const sortedPosts = userFollowingPosts?.sort((a, b) => postsOrder === 'latest' ? b?.createdAt - a?.createdAt : a?.likes?.likeCount - b?.likes?.likeCount );
 
   const sortedPosts = userFollowingPosts?.sort((a, b) =>
   postsOrder === 'latest'
     ? new Date(b?.createdAt) - new Date(a?.createdAt)
     : b?.likes?.likeCount - a?.likes?.likeCount
 );
+
   return (
     <div className="px-20 py-10 flex flex-col gap-8  w-[calc(100%-46rem)] min-h-screen  ml-[22rem]">
       <CreatePost />
       <div className="w-full card rounded-lg h-14 flex justify-between">
-      <button className="flex items-center justify-center gap-2 text-lg w-[50%] hover:bg-rose-100 hover:rounded-e-2xl"
+      <button className={`flex items-center justify-center gap-2 text-lg w-[50%]  hover:rounded-e-2xl ${postsOrder === 'trending' && "bg-rose-100 rounded-r-2xl" }`}
       onClick={() => setPostsOrder('trending')}
       >
         <BiTrendingUp />
         <span>Trending</span>
       </button>
-      <button className="flex items-center justify-center gap-2 text-lg w-[50%] hover:bg-rose-100 hover:rounded-s-2xl"
+      <button className={`flex items-center justify-center gap-2 text-lg w-[50%] hover:bg-rose-100 hover:rounded-s-2xl ${postsOrder === 'latest' && "bg-rose-100 rounded-l-2xl"}`}
       onClick={() => setPostsOrder('latest')}
       >
         <AiOutlineClockCircle />

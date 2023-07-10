@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../../assets";
 import { authSelector } from "../../features/authSlice";
+import { avatar1 } from "../../backend/db/assets";
 const Header = () => {
   const navigate = useNavigate();
   const { foundUser } = useSelector(authSelector);
@@ -43,9 +44,9 @@ const Header = () => {
         </div>
       </form>
       <div className="flex items-center justify-center gap-7">
-        <BsMoonStars className="w-7 h-7 hover:cursor-pointer" fill="#5EBBFF" />
+        {/* <BsMoonStars className="w-7 h-7 hover:cursor-pointer" fill="#5EBBFF" /> */}
         <img
-          src={foundUser?.profile}
+          src={foundUser?.profile || avatar1}
           alt="avatar"
           className="w-14 h-14 rounded-full  object-contain cursor-pointer"
           onClick={() => navigate(`/profile/${foundUser?.username}`)}

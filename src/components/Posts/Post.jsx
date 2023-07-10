@@ -7,7 +7,13 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authSelector } from "../../features/authSlice";
-import { commentOnPost, deletePost, dislikePost, likePost, postsSelector } from "../../features/postsSlice";
+import {
+  commentOnPost,
+  deletePost,
+  dislikePost,
+  likePost,
+  postsSelector,
+} from "../../features/postsSlice";
 import {
   bookmarkPost,
   removeBookmarkPost,
@@ -19,6 +25,7 @@ import {
 } from "../../utils/postsHelper";
 import { Dropdown, Space } from "antd";
 import EditModal from "./EditModal";
+import { avatar1 } from "../../backend/db/assets";
 
 const Post = ({ postData, showComments, postId }) => {
   const dispatch = useDispatch();
@@ -30,10 +37,10 @@ const Post = ({ postData, showComments, postId }) => {
     _id: uuid(),
     comment: "",
     createdAt: new Date(),
-    firstName: foundUser?.firstName, 
+    firstName: foundUser?.firstName,
     lastName: foundUser?.lastName,
-    profile: foundUser?.profile
-  })
+    profile: foundUser?.profile,
+  });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const likedByUser = getIsLikedByUser(postData, foundUser?.username);
   const bookmarkedByUser = getIsBookmarkedByUser(
@@ -41,61 +48,99 @@ const Post = ({ postData, showComments, postId }) => {
     postData?._id,
     foundUser?.username
   );
-  const userDetails = usersData?.find((user) => postData?.userId === user._id);
+  const userDetails = usersData?.find((user) => postData?.userId === user?._id);
 
   const commentHandler = () => {
-    const posts = postsData?.map(post => post._id === postId ? {...post, comments: [...post.comments, comment]} : {...post});
-    const postData = posts?.find(post => post._id === postId )
-    console.log('commented posts', posts)
-    dispatch(commentOnPost({encodedToken, postData}))
-  }
-  
+    const posts = postsData?.map((post) =>
+      post._id === postId
+        ? { ...post, comments: [...post.comments, comment] }
+        : { ...post }
+    );
+    const postData = posts?.find((post) => post._id === postId);
+    console.log("commented posts", posts);
+    dispatch(commentOnPost({ encodedToken, postData }));
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const currentDate = new Date();
+
+    const diffInSeconds = Math.floor((currentDate - date) / 1000);
+
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} seconds ago`;
+    } else {
+      const diffInMinutes = Math.floor(diffInSeconds / 60);
+
+      if (diffInMinutes < 60) {
+        return `${diffInMinutes} minutes ago`;
+      } else {
+        const options = {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        };
+        const formattedDateTime = date.toLocaleDateString(undefined, options);
+        return formattedDateTime;
+      }
+    }
+  };
 
   const dropdownItems = [
     {
       label: (
-        <button
-        onClick={() => setIsEditModalOpen(val => !val)}
-        >Edit</button>
+        <button onClick={() => setIsEditModalOpen((val) => !val)}>Edit</button>
       ),
-      key: '0'
+      key: "0",
     },
     {
       label: (
         <button
-        onClick={() => dispatch(deletePost({encodedToken, postId: postData?._id}))}
-        >Delete</button>
+          onClick={() =>
+            dispatch(deletePost({ encodedToken, postId: postData?._id }))
+          }
+        >
+          Delete
+        </button>
       ),
-      key: '1'
-    }
-  ]
+      key: "1",
+    },
+  ];
 
-  // console.log({postsData})
-  // console.log({userDetails})
   return (
     <div className=" card p-5 rounded-xl">
       <div className="flex justify-between">
         <div className="flex items-start justify-center gap-3">
           <img
-            src={userDetails?.profile}
+            src={userDetails?.profile || avatar1}
+            onClick={() => navigate(`/profile/${userDetails?.username}`)}
             alt="avatar"
-            className="w-12 h-12 rounded-full object-contain"
+            className="w-12 h-12 rounded-full object-contain cursor-pointer"
           />
-          <div className="flex-col gap-2 text-start">
-            <p>{postData?.firstName + " " + postData?.lastName}</p>
-            <p>{postData?.createdAt}</p>
+          <div className="flex-col text-start">
+            <p onClick={() => navigate(`/profile/${userDetails?.username}`)}
+            className="cursor-pointer"
+            >
+              {postData?.firstName + " " + postData?.lastName}
+            </p>
+            {/* <p>{postData?.createdAt}</p> */}
+            <p className="text-[13px] text-[#928da5]">
+              {formatDate(postData?.createdAt)}
+            </p>
           </div>
         </div>
         <div>
           <Dropdown
-          trigger="click"
-           menu={{ items: dropdownItems }}
-           placement="bottomLeft"
-           >
+            trigger="click"
+            menu={{ items: dropdownItems }}
+            placement="bottomLeft"
+          >
             {/* <button onClick={(e) => e.preventDefault()}> */}
-              {/* <Space> */}
-                <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
-              {/* </Space> */}
+            {/* <Space> */}
+            <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
+            {/* </Space> */}
             {/* </button> */}
           </Dropdown>
         </div>
@@ -213,15 +258,14 @@ const Post = ({ postData, showComments, postId }) => {
         </div>
       )}
 
-      {
-        isEditModalOpen && 
-        <EditModal 
-        isEditModalOpen={isEditModalOpen}
-        setIsEditModalOpen={setIsEditModalOpen}
-        userDetails={userDetails}
-        postData={postData}
+      {isEditModalOpen && (
+        <EditModal
+          isEditModalOpen={isEditModalOpen}
+          setIsEditModalOpen={setIsEditModalOpen}
+          userDetails={userDetails}
+          postData={postData}
         />
-      }
+      )}
     </div>
   );
 };

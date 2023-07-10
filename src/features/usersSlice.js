@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   bookmarksPostService,
+  editProfileService,
   followUserService,
   getAllUsersService,
   removeBookmarkedPostService,
@@ -119,6 +120,21 @@ export const removeBookmarkPost = createAsyncThunk(
   }
 );
 
+export const editProfile = createAsyncThunk(
+  "users/editProfile",
+  async ({ encodedToken, userData }, { rejectWithValue }) => {
+    try {
+      const response = await editProfileService(encodedToken, userData);
+
+      if (response.status === 201) {
+        return response.data.user;
+      }
+    } catch (error) {
+      console.log({ error });
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 
 const usersSlice = createSlice({
@@ -202,6 +218,23 @@ const usersSlice = createSlice({
       .addCase(unfollowUser.rejected, (state) => {
         state.disabled.followDisabled = false;
       })
+      .addCase(editProfile.pending, (state) => {
+        state.disabled.editDisabled = true;
+      })
+      .addCase(editProfile.fulfilled, (state, action) => {
+        const userIndex = state.usersData.findIndex(
+          (data) => data._id === action.payload._id
+        );
+
+        if (userIndex !== undefined) {
+          state.usersData[userIndex] = action.payload;
+          localStorage.setItem("foundUser", JSON.stringify(action.payload));
+        }
+        state.disabled.editDisabled = false;
+      })
+      .addCase(editProfile.rejected, (state) => {
+        state.disabled.editDisabled = false;
+      });
   },
 });
 

@@ -29,7 +29,7 @@ export const users = [
     updatedAt: "2023-06-17T10:33:36+05:30",
     email: "singhjatin0812@gmail.com",
     profile: jatinProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
+    portfolio: "https://sneakhead.vercel.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [
       {
@@ -61,7 +61,7 @@ export const users = [
     updatedAt: "2023-06-17T10:33:36+05:30",
     email: "swastik123@gmail.com",
     profile: swastikProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
+    portfolio: "https://sneakhead.vercel.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [
       {
@@ -93,7 +93,7 @@ export const users = [
     updatedAt: "2023-06-17T10:33:36+05:30",
     email: "devang123@gmail.com",
     profile: devangProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
+    portfolio: "https://sneakhead.vercel.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [
       {
@@ -125,7 +125,7 @@ export const users = [
     updatedAt: formatDate(),
     email: "yash123@gmail.com",
     profile: yashProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
+    portfolio: "https://sneakhead.vercel.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [
       {
@@ -254,7 +254,7 @@ export const users = [
     updatedAt: formatDate(),
     email: "john123@gmail.com",
     profile: johnProfile,
-    portfolio: "https://sandhya-dev-7.netlify.app/",
+    portfolio: "https://sneakhead.vercel.app/",
     bio: "Don't Worry, I'm The Strongest",
     followers: [
       // {

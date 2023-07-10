@@ -19,8 +19,10 @@ function App() {
   useEffect(() => {
     if (encodedToken) {
       dispatch(fetchUsers());
+      dispatch(fetchPosts());
     }
   }, [encodedToken]);
+
 
   return (
     <div>

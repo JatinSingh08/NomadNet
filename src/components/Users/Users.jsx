@@ -7,9 +7,9 @@ import UserCard from "./UserCard";
 const Users = () => {
   const { usersData } = useSelector(userSelector);
   const { foundUser } = useSelector(authSelector);
-  const dispatch = useDispatch();
 
   const currentUser = usersData?.find((user) => user?._id === foundUser?._id);
+  console.log({currentUser})
   const unFollowedUsers = usersData?.filter(
     (user) =>
       user._id !== currentUser?._id &&
@@ -17,16 +17,18 @@ const Users = () => {
         (followingUser) => followingUser._id !== user._id
       )
   );
+  console.log({usersData})
 
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
-
+  const numberOfUsers = unFollowedUsers?.length;
+  console.log('unfollowUser', unFollowedUsers)
+  // flex flex-col p-2 gap-4
   return (
-    <div className="flex flex-col p-2 gap-4 ">
-      {unFollowedUsers?.map((user) => (
+    <div className={` ${numberOfUsers > 5 ? "flex flex-col px-2 gap-4  overflow-y-scroll scrollbar-theme h-72" : " flex flex-col p-2 gap-4"} ` }>
+      {
+      unFollowedUsers?.map((user) => (
         <UserCard userData={user} key={user._id} />
-      ))}
+      ))
+      }
     </div>
   );
 };

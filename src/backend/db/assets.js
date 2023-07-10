@@ -10,6 +10,7 @@ export const josephProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/
 export const albertProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688981060/albert-dera-ILip77SbmOE-unsplash_ketv1s.jpg';
 export const slavProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688981078/slav-romanov-BrEAp01_m5w-unsplash_r4qnae.jpg';
 export const matheusProfile = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1688980966/matheus-ferrero-W7b3eDUb_2I-unsplash_lnekhb.jpg';
+export const avatar1 = 'https://res.cloudinary.com/ddldfhcup/image/upload/v1689024593/sampleAvatar_u31clb.avif';
 
 
 // Posts

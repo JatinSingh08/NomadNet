@@ -4,6 +4,7 @@ import { BsFillCameraFill, BsFillEmojiSmileFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../../features/authSlice";
 import { createNewPost } from "../../features/postsSlice";
+import { avatar1 } from "../../backend/db/assets";
 
 const CreatePost = () => {
   const [showEmojiPicker, setEmojiPicker] = useState(false);
@@ -53,7 +54,7 @@ const CreatePost = () => {
       <h1 className="text-start border-b-2 text-xl">Create Post</h1>
       <div className="border-b-2 mt-4 flex py-4 gap-2 justify-center items-center">
         <img
-          src={foundUser?.profile}
+          src={foundUser?.profile ?? avatar1}
           alt="vatar"
           className="w-14 h-14 rounded-full object-contain"
         />
