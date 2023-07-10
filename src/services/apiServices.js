@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   BOOKMARK_A_POST,
+  COMMENT_ON_POST,
   DISLIKE_A_POST,
   EDIT_POST,
   EDIT_PROFILE,
@@ -61,6 +62,18 @@ export const dislikePostService = (encodedToken, postId) =>
       },
     }
   );
+
+export const commentOnPostService = (encodedToken, postData) => 
+  axios.post (
+    `${COMMENT_ON_POST}${postData._id}`,
+    { postData },
+    {
+      headers: {
+        authorization: encodedToken
+      }
+    }
+  )
+
 
 export const editPostService = (encodedToken, postData) =>
   axios.post(

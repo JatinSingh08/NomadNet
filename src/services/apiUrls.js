@@ -10,7 +10,7 @@ const LIKE_A_POST = `${base_url}/posts/like/`;
 const DISLIKE_A_POST = `${base_url}/posts/dislike/`;
 const BOOKMARK_A_POST = `${base_url}/users/bookmark/`;
 const REMOVE_BOOKMARKED_POST = `${base_url}/users/remove-bookmark/`;
-const COMMENT_ON_POST = `${base_url}/`;
+const COMMENT_ON_POST = `${base_url}/posts/comment/`;
 
 // users
 const GET_ALL_USERS = `${base_url}/users/`;

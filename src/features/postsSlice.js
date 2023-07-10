@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createPostService, dislikePostService, getAllPostService, likePostService } from "../services/apiServices";
+import { commentOnPostService, createPostService, dislikePostService, getAllPostService, likePostService } from "../services/apiServices";
 
 const initialState = {
   postsData: [],
@@ -74,6 +74,23 @@ export const dislikePost = createAsyncThunk(
   }
 )
 
+export const commentOnPost = createAsyncThunk(
+  "users/commentPost",
+  async ({encodedToken, postData}, {rejectWithValue}) => {
+    try {
+      const response = await commentOnPostService(encodedToken, postData);
+      if(response.status === 200 || response.status === 201) {
+        console.log('response', response.data.posts);
+        return response.data.posts;
+
+      }
+    } catch (error) {
+      console.log(error?.message);
+      return rejectWithValue(error?.message);
+    }
+  }
+)
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -85,7 +102,6 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
       state.postsData = action.payload;
-      console.log("action", action.payload);
     })
     .addCase(fetchPosts.rejected, (state, action) => {
       state.loading = false;
@@ -113,6 +129,19 @@ const postsSlice = createSlice({
     })
     .addCase(dislikePost.rejected, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(commentOnPost.pending, (state) => {
+      state.dislikePost.commentDisabled = true;
+    })
+    .addCase(commentOnPost.fulfilled, (state, action) => {
+      if(action.payload) {
+        state.postsData = action.payload;
+      }
+      console.log('action', action.payload);
+      state.disabled.commentDisabled = false;
+    })
+    .addCase(commentOnPost.rejected, (state) => {
+      state.disabled.commentDisabled = false;
     })
   }
 })

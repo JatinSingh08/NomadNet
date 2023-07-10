@@ -51,11 +51,11 @@ const CreatePost = () => {
   return (
     <div className="card rounded-2xl p-4">
       <h1 className="text-start border-b-2 text-xl">Create Post</h1>
-      <div className="border-b-2 mt-4 flex py-4">
+      <div className="border-b-2 mt-4 flex py-4 gap-2 justify-center items-center">
         <img
           src={foundUser?.profile}
           alt="vatar"
-          className="w-16 h-16 rounded-full object-contain"
+          className="w-14 h-14 rounded-full object-contain"
         />
         <textarea
           placeholder="What is happening?!"

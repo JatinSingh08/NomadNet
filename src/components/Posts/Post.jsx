@@ -1,12 +1,13 @@
+import { v4 as uuid } from "uuid";
 import { BookmarkIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineShareAlt } from "react-icons/ai";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { FaRegCommentDots } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authSelector } from "../../features/authSlice";
-import { dislikePost, likePost } from "../../features/postsSlice";
+import { commentOnPost, dislikePost, likePost, postsSelector } from "../../features/postsSlice";
 import {
   bookmarkPost,
   removeBookmarkPost,
@@ -17,11 +18,20 @@ import {
   getIsLikedByUser,
 } from "../../utils/postsHelper";
 
-const Post = ({ postData, showComments }) => {
+const Post = ({ postData, showComments, postId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { encodedToken, foundUser } = useSelector(authSelector);
   const { usersData } = useSelector(userSelector);
+  const { postsData } = useSelector(postsSelector);
+  const [comment, setComment] = useState({
+    _id: uuid(),
+    comment: "",
+    createdAt: new Date(),
+    firstName: foundUser?.firstName, 
+    lastName: foundUser?.lastName,
+    profile: foundUser?.profile
+  })
   const likedByUser = getIsLikedByUser(postData, foundUser?.username);
   const bookmarkedByUser = getIsBookmarkedByUser(
     usersData,
@@ -30,6 +40,16 @@ const Post = ({ postData, showComments }) => {
   );
   const userDetails = usersData?.find((user) => postData?.userId === user._id);
 
+  const commentHandler = () => {
+    const posts = postsData?.map(post => post._id === postId ? {...post, comments: [...post.comments, comment]} : {...post});
+    const postData = posts?.find(post => post._id === postId )
+    console.log('commented posts', posts)
+    dispatch(commentOnPost({encodedToken, postData}))
+  }
+
+
+  // console.log({postsData})
+  // console.log({userDetails})
   return (
     <div className=" card p-5 rounded-xl">
       <div className="flex justify-between">
@@ -81,16 +101,18 @@ const Post = ({ postData, showComments }) => {
               <p className="text-sm">{postData?.likes?.likeCount}</p>
             </button>
 
-            <span
+            <button
               className="flex items-center justify-center gap-1 icon-theme"
               onClick={() => navigate(`/post/${postData?._id}`)}
             >
               <FaRegCommentDots className="cursor-pointer" />
               <p className="text-sm">{postData?.comments?.length}</p>
-            </span>
-            <AiOutlineShareAlt className="cursor-pointer icon-theme" />
+            </button>
+            <button>
+              <AiOutlineShareAlt className="cursor-pointer icon-theme" />
+            </button>
           </div>
-          <div
+          <button
             onClick={() => {
               let username = foundUser?.username;
               if (bookmarkedByUser) {
@@ -118,7 +140,7 @@ const Post = ({ postData, showComments }) => {
               className="w-6 h-6 cursor-pointer icon-theme"
               fill={`${bookmarkedByUser ? "black" : "transparent"}`}
             />
-          </div>
+          </button>
         </div>
       </div>
       {showComments && (
@@ -142,9 +164,12 @@ const Post = ({ postData, showComments }) => {
             <textarea
               placeholder="comment here"
               className="w-full px-4 bg-rose-50 rounded-lg outline-none pt-2 resize-none outline-violet-200"
+              onChange={(e) => setComment(val => ({...val, comment: e.target.value}))}
               // onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
             ></textarea>
-            <button className="button-theme rounded-2xl h-8">Reply</button>
+            <button className="button-theme rounded-2xl h-8"
+            onClick={commentHandler}
+            >Post</button>
           </div>
         </div>
       )}

@@ -17,15 +17,16 @@ const Home = () => {
   }, []);
 
   const user = usersData?.find((user) => user.username === foundUser.username);
-  console.log({ user });
+  const userFollowingPosts = postsData?.filter( post => post.userId === user?._id || user?.following?.some(userData => userData._id === post.userId));
+  
 
   return (
     <div className="px-20 py-10 flex flex-col gap-8  w-[calc(100%-46rem)] min-h-screen  ml-[22rem]">
       <CreatePost />
       <PostsOrder />
       {/* <Users /> */}
-      {postsData.map((postData) => (
-        <Post postData={postData} />
+      {userFollowingPosts?.map((postData, index) => (
+        <Post postData={postData} key={index} />
       ))}
     </div>
   );

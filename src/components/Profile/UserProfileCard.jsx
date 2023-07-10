@@ -44,6 +44,9 @@ const UserProfileCard = ({ user, usersData }) => {
             https://sneakhead.vercel.app/
           </a>
         </div>
+        {
+          
+        }
         <button
           className="follow-btn"
           onClick={() => {
