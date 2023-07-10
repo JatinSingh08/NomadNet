@@ -12,7 +12,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsers());
     dispatch(fetchPosts());
   }, []);
 
