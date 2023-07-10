@@ -1,16 +1,7 @@
-# <h1 align="center"> Webuzz </h1>
+# <h1 align="center"> NomadNet </h1>
 
 <h3 align="center">Webuzz is an anime-themed social media app built using React.js, Redux Toolkit, and Tailwind CSS. It provides a platform for anime enthusiasts to connect, share, and engage with each other through posts, likes, comments, and more.</h3>
 <br/>
-
-## Getting Started
-
-To run the Webuzz web application locally, please follow these steps:
-
-1. git clone https://github.com/SandhyaR1007/webuzz.git
-2. cd webuzz.
-3. npm install.
-4. npm start
 
 ## Technologies Used
 
@@ -39,11 +30,6 @@ To run the Webuzz web application locally, please follow these steps:
 
   - Like/unlike posts
 
-- Comment & Replies:
-
-  - Comment on posts
-  - Reply to comments
-
 - Bookmark:
 
   - Bookmark/unbookmark posts
@@ -69,6 +55,3 @@ To run the Webuzz web application locally, please follow these steps:
 
   - Search users by first name, last name, or username
 
-- Responsive
-
-- Loaders and Toasts
