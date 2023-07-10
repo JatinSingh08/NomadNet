@@ -40,7 +40,7 @@ const LoginForm = () => {
           <input
             className="w-auto border rounded-md p-2 outline-none"
             type="text"
-            value={userDetails.email}
+            value={userDetails?.email}
             autoComplete="nope"
             placeholder="Enter Email"
             onChange={(e) =>

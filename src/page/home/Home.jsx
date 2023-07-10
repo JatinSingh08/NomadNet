@@ -16,8 +16,8 @@ const Home = () => {
     dispatch(fetchPosts());
   }, []);
 
-  const user = usersData?.find((user) => user.username === foundUser.username);
-  const userFollowingPosts = postsData?.filter( post => post.userId === user?._id || user?.following?.some(userData => userData._id === post.userId));
+  const user = usersData?.find((user) => user?.username === foundUser?.username);
+  const userFollowingPosts = postsData?.filter( post => post?.userId === user?._id || user?.following?.some(userData => userData._id === post.userId));
   
 
   return (
