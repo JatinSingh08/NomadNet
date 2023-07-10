@@ -9,7 +9,7 @@ const Users = () => {
   const { foundUser } = useSelector(authSelector);
   const dispatch = useDispatch();
 
-  const currentUser = usersData?.find((user) => user._id === foundUser._id);
+  const currentUser = usersData?.find((user) => user?._id === foundUser?._id);
   const unFollowedUsers = usersData?.filter(
     (user) =>
       user._id !== currentUser?._id &&
