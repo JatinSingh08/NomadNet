@@ -1,11 +1,13 @@
-import { v4 as uuid } from "uuid";
 import { BookmarkIcon } from "@heroicons/react/24/outline";
+import { Dropdown } from "antd";
 import React, { useState } from "react";
 import { AiOutlineShareAlt } from "react-icons/ai";
-import { IoEllipsisHorizontal } from "react-icons/io5";
 import { FaRegCommentDots } from "react-icons/fa";
+import { IoEllipsisHorizontal } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
+import { avatar1 } from "../../backend/db/assets";
 import { authSelector } from "../../features/authSlice";
 import {
   commentOnPost,
@@ -23,9 +25,7 @@ import {
   getIsBookmarkedByUser,
   getIsLikedByUser,
 } from "../../utils/postsHelper";
-import { Dropdown, Space } from "antd";
 import EditModal from "./EditModal";
-import { avatar1 } from "../../backend/db/assets";
 
 const Post = ({ postData, showComments, postId }) => {
   const dispatch = useDispatch();
@@ -120,8 +120,9 @@ const Post = ({ postData, showComments, postId }) => {
             className="w-12 h-12 rounded-full object-contain cursor-pointer"
           />
           <div className="flex-col text-start">
-            <p onClick={() => navigate(`/profile/${userDetails?.username}`)}
-            className="cursor-pointer"
+            <p
+              onClick={() => navigate(`/profile/${userDetails?.username}`)}
+              className="cursor-pointer"
             >
               {postData?.firstName + " " + postData?.lastName}
             </p>
@@ -131,19 +132,17 @@ const Post = ({ postData, showComments, postId }) => {
             </p>
           </div>
         </div>
-        <div>
-          <Dropdown
-            trigger="click"
-            menu={{ items: dropdownItems }}
-            placement="bottomLeft"
-          >
-            {/* <button onClick={(e) => e.preventDefault()}> */}
-            {/* <Space> */}
-            <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
-            {/* </Space> */}
-            {/* </button> */}
-          </Dropdown>
-        </div>
+        {userDetails?._id === foundUser?._id && (
+          <div>
+            <Dropdown
+              trigger="click"
+              menu={{ items: dropdownItems }}
+              placement="bottomLeft"
+            >
+              <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
+            </Dropdown>
+          </div>
+        )}
       </div>
       <div className="text-start px-8">
         <div className="mt-6">{postData?.content}</div>
