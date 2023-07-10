@@ -40,7 +40,7 @@ const Menubar = () => {
         </Link>
         <Link
           className="flex gap-6 items-center hover:cursor-pointer"
-          to={`/profile/${foundUser.username}`}
+          to={`/profile/${foundUser?.username}`}
         >
           <CgProfile className=" text-[#9E98B3] w-6 h-6" />
           <span>Profile</span>
