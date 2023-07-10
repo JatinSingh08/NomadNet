@@ -183,7 +183,7 @@ const SignupForm = () => {
           <button
             type="submit"
             disabled={signingUp}
-            className="button-theme bg-slate-900 shadow-md text-slate-200"
+            className=" bg-slate-900  text-slate-100 shadow-2xl px-2 py-1 active:scale-90 transition-all duration-100 ease-in-out "
           >
             {signingUp ? "Signing Up..." : "Sign Up"}
           </button>

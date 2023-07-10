@@ -344,5 +344,47 @@ export const posts = [
     updatedAt: formatDate(),
     userId: "6",
   },
+  {
+    _id: "9",
+    content: "There are 4 people in my neighborhood that drive Lambos. Every single one of them is a PHP developer.",
+    postMedia: swastikPosts[1],
+    likes: {
+      likeCount: 16,
+      likedBy: [
+        {
+          _id: "3",
+          firstName: "Devang",
+          lastName: "Mehra",
+          username: "devang123",
+          profile: devangProfile,
+        },
+        {
+          _id: "4",
+          firstName: "Yash",
+          lastName: "Rawat",
+          username: "yash123",
+          profile: yashProfile,
+        },
+      ],
+      dislikedBy: [],
+    },
+    comments: [
+      {
+        _id: "1",
+        comment: "Don't I look good",
+        username: "mathues123",
+        createdAt: formatDate(),
+        firstName: "Mathues",
+        lastName: "Ferraro",
+        profile: devangProfile,
+      },
+    ],
+    username: "john123",
+    firstName: "John",
+    lastName: "Doe",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    userId: "5",
+  },
   
 ];

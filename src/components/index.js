@@ -15,3 +15,5 @@ export { default as SharedLayout } from './Layout/SharedLayout.jsx';
 
 export { default as LoginForm } from './Auth/LoginForm.jsx';
 export { default as SignupForm } from './Auth/SignupForm.jsx';
+
+export { default as EditModal } from './Posts/EditModal.jsx';

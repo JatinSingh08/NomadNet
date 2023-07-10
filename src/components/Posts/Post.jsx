@@ -7,7 +7,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authSelector } from "../../features/authSlice";
-import { commentOnPost, dislikePost, likePost, postsSelector } from "../../features/postsSlice";
+import { commentOnPost, deletePost, dislikePost, likePost, postsSelector } from "../../features/postsSlice";
 import {
   bookmarkPost,
   removeBookmarkPost,
@@ -17,6 +17,8 @@ import {
   getIsBookmarkedByUser,
   getIsLikedByUser,
 } from "../../utils/postsHelper";
+import { Dropdown, Space } from "antd";
+import EditModal from "./EditModal";
 
 const Post = ({ postData, showComments, postId }) => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const Post = ({ postData, showComments, postId }) => {
     lastName: foundUser?.lastName,
     profile: foundUser?.profile
   })
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const likedByUser = getIsLikedByUser(postData, foundUser?.username);
   const bookmarkedByUser = getIsBookmarkedByUser(
     usersData,
@@ -46,7 +49,26 @@ const Post = ({ postData, showComments, postId }) => {
     console.log('commented posts', posts)
     dispatch(commentOnPost({encodedToken, postData}))
   }
+  
 
+  const dropdownItems = [
+    {
+      label: (
+        <button
+        onClick={() => setIsEditModalOpen(val => !val)}
+        >Edit</button>
+      ),
+      key: '0'
+    },
+    {
+      label: (
+        <button
+        onClick={() => dispatch(deletePost({encodedToken, postId: postData?._id}))}
+        >Delete</button>
+      ),
+      key: '1'
+    }
+  ]
 
   // console.log({postsData})
   // console.log({userDetails})
@@ -56,7 +78,7 @@ const Post = ({ postData, showComments, postId }) => {
         <div className="flex items-start justify-center gap-3">
           <img
             src={userDetails?.profile}
-            alt=""
+            alt="avatar"
             className="w-12 h-12 rounded-full object-contain"
           />
           <div className="flex-col gap-2 text-start">
@@ -64,7 +86,19 @@ const Post = ({ postData, showComments, postId }) => {
             <p>{postData?.createdAt}</p>
           </div>
         </div>
-        <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
+        <div>
+          <Dropdown
+          trigger="click"
+           menu={{ items: dropdownItems }}
+           placement="bottomLeft"
+           >
+            {/* <button onClick={(e) => e.preventDefault()}> */}
+              {/* <Space> */}
+                <IoEllipsisHorizontal className="font-bold hover:cursor-pointer" />
+              {/* </Space> */}
+            {/* </button> */}
+          </Dropdown>
+        </div>
       </div>
       <div className="text-start px-8">
         <div className="mt-6">{postData?.content}</div>
@@ -164,15 +198,30 @@ const Post = ({ postData, showComments, postId }) => {
             <textarea
               placeholder="comment here"
               className="w-full px-4 bg-rose-50 rounded-lg outline-none pt-2 resize-none outline-violet-200"
-              onChange={(e) => setComment(val => ({...val, comment: e.target.value}))}
+              onChange={(e) =>
+                setComment((val) => ({ ...val, comment: e.target.value }))
+              }
               // onChange={(e) => setPostData(val => ({...val, content: e.target.value}))}
             ></textarea>
-            <button className="button-theme rounded-2xl h-8"
-            onClick={commentHandler}
-            >Post</button>
+            <button
+              className="button-theme rounded-2xl h-8"
+              onClick={commentHandler}
+            >
+              Post
+            </button>
           </div>
         </div>
       )}
+
+      {
+        isEditModalOpen && 
+        <EditModal 
+        isEditModalOpen={isEditModalOpen}
+        setIsEditModalOpen={setIsEditModalOpen}
+        userDetails={userDetails}
+        postData={postData}
+        />
+      }
     </div>
   );
 };

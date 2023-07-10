@@ -16,7 +16,7 @@ const CreatePost = () => {
     userId: foundUser?._id,
     content: "",
     postMedia: "",
-  });
+  }); 
   const dispatch = useDispatch();
 
   const createPostHandler = () => {

@@ -9,16 +9,13 @@ const UserProfileCard = ({ user, usersData }) => {
   const dispatch = useDispatch();
 
   const currentUser = usersData?.find(
-    (user) => user.username === foundUser.username
+    (user) => user.username === foundUser?.username
   );
-  console.log({ currentUser });
 
   const isFollowed = currentUser?.following?.find(
     (followedUser) => followedUser._id === user._id
   );
-  console.log({ isFollowed });
 
-  console.log({ user });
   return (
     <div className="card rounded-2xl p-4 flex flex-col gap-4">
       <div className="flex gap-3">
@@ -45,22 +42,30 @@ const UserProfileCard = ({ user, usersData }) => {
           </a>
         </div>
         {
-          
+          user?._id === foundUser?._id ?
+          (
+            <button
+            className="follow-btn"
+          >
+           Edit Profile
+          </button>
+          ) : (
+            <button
+            className="follow-btn"
+            onClick={() => {
+              if (isFollowed) {
+                dispatch(
+                  unfollowUser({ encodedToken, unfollowUserId: user?._id })
+                );
+              } else {
+                dispatch(followUser({ encodedToken, followUserId: user?._id }));
+              }
+            }}
+          >
+            {isFollowed ? "Following" : "Follow"}
+          </button>
+          )
         }
-        <button
-          className="follow-btn"
-          onClick={() => {
-            if (isFollowed) {
-              dispatch(
-                unfollowUser({ encodedToken, unfollowUserId: user?._id })
-              );
-            } else {
-              dispatch(followUser({ encodedToken, followUserId: user?._id }));
-            }
-          }}
-        >
-          {isFollowed ? "Following" : "Follow"}
-        </button>
       </div>
       <div className="flex gap-2">
         <div className="flex gap-1">
