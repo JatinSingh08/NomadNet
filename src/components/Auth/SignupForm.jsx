@@ -139,7 +139,7 @@ const SignupForm = () => {
               type="button"
               onClick={togglePasswordVisibility}
             >
-              {isPasswordVisible ? (
+              {!isPasswordVisible ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
