@@ -20,7 +20,7 @@ import {
 
 export const users = [
   {
-    _id: 1,
+    _id: '1',
     firstName: "Jatin",
     lastName: "Singh",
     username: "jatinsingh08",
@@ -344,8 +344,8 @@ export const users = [
     _id: "8",
     firstName: "Albert",
     lastName: "Dera",
-    username: "Albert123",
-    password: "Dera123",
+    username: "albert123",
+    password: "dera123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     email: "albert123@gmail.com",

@@ -88,6 +88,7 @@ const Post = ({ postData, showComments, postId }) => {
     }
   };
 
+  console.log({userDetails})
   const dropdownItems = [
     {
       label: (
@@ -109,6 +110,7 @@ const Post = ({ postData, showComments, postId }) => {
     },
   ];
 
+  
   return (
     <div className=" card p-5 rounded-xl">
       <div className="flex justify-between">
@@ -194,7 +196,6 @@ const Post = ({ postData, showComments, postId }) => {
             onClick={() => {
               let username = foundUser?.username;
               if (bookmarkedByUser) {
-                console.log("removing from bookmark");
                 dispatch(
                   removeBookmarkPost({
                     encodedToken,
@@ -203,7 +204,6 @@ const Post = ({ postData, showComments, postId }) => {
                   })
                 );
               } else {
-                console.log("added to bookmark");
                 dispatch(
                   bookmarkPost({
                     encodedToken,
