@@ -13,7 +13,7 @@ export const posts = [
     content: "Hey, What's up. New to SocialSphere...",
     postMedia: swastikPosts[1],
     likes: {
-      likeCount: 2,
+      likeCount: 5,
       likedBy: [
         {
           _id: "3",
@@ -55,7 +55,7 @@ export const posts = [
     content: "It's nice weather outside...",
     postMedia: swastikPosts[1],
     likes: {
-      likeCount: 2,
+      likeCount: 9,
       likedBy: [
         {
           _id: "3",
@@ -97,7 +97,7 @@ export const posts = [
     content: "Heavy leg workout today at gym 💪",
     postMedia: swastikPosts[1],
     likes: {
-      likeCount: 2,
+      likeCount: 13,
       likedBy: [
         {
           _id: "3",

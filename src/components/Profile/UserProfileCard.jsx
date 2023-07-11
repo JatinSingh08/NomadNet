@@ -1,22 +1,28 @@
+import { Modal } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authSelector } from "../../features/authSlice";
-import { followUser, unfollowUser } from "../../features/usersSlice";
-import EditModal from "../Posts/EditModal";
-import { Modal } from "antd";
 import { avatar1 } from "../../backend/db/assets";
+import { authSelector } from "../../features/authSlice";
+import {
+  editProfile,
+  followUser,
+  unfollowUser,
+} from "../../features/usersSlice";
 
 const UserProfileCard = ({ user, usersData }) => {
   const { encodedToken, foundUser } = useSelector(authSelector);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const dispatch = useDispatch();
 
+  console.log({user})
   const [bioDetails, setBioDetails] = useState({
     bio: user?.bio,
     portfolio: user?.portfolio,
   });
 
-  console.log({user})
+
+  console.log({bioDetails})
+
   const currentUser = usersData?.find(
     (user) => user.username === foundUser?.username
   );
@@ -29,10 +35,18 @@ const UserProfileCard = ({ user, usersData }) => {
     setIsEditModalOpen(true);
   };
 
-  // const editBioHandler = () => {
-    
-  // }
+  const editBioHandler = () => {
+    const userData = {
+      ...user,
+      bio: bioDetails?.bio,
+      portfolio: bioDetails?.portfolio,
+    };
 
+    if(bioDetails?.bio?.trim().length || bioDetails?.portfolio?.trim().length) {
+      dispatch(editProfile({ encodedToken, userData }));
+      setIsEditModalOpen(false);
+    }
+  };
 
   return (
     <>
@@ -54,7 +68,9 @@ const UserProfileCard = ({ user, usersData }) => {
           <div className="text-start">
             <p className="text-md">{user?.bio}</p>
             <a
-              href="https://sneakhead.vercel.app/"
+              href={user?.portfolio}
+              target="_blank"
+              rel="noreferrer"
               className="text-blue-400 text-sm"
             >
               {user?.portfolio}
@@ -106,18 +122,16 @@ const UserProfileCard = ({ user, usersData }) => {
             placeholder="center"
             footer={null}
           >
-            {/* <EditModal
-              isEditModalOpen={isEditModalOpen}
-              setIsEditModalOpen={setIsEditModalOpen}
-            /> */}
-
             <div>
               <label htmlFor="bio">
                 <h2 className="text-xl">Bio</h2>
                 <textarea
                   placeholder="Where are you rn ?!🌍"
+                  value={bioDetails?.bio}
                   className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
-
+                  onChange={(e) =>
+                    setBioDetails((val) => ({ ...val, bio: e.target.value }))
+                  }
                 ></textarea>
               </label>
 
@@ -125,15 +139,30 @@ const UserProfileCard = ({ user, usersData }) => {
                 <h2 className="text-xl">Portfolio</h2>
                 <textarea
                   placeholder="Showcase your creativity !!"
+                  onChange={(e) =>
+                    setBioDetails((val) => ({
+                      ...val,
+                      portfolio: e.target.value,
+                    }))
+                  }
                   className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
+                  value={bioDetails?.portfolio}
                 ></textarea>
               </label>
 
               <div className="flex gap-3 mt-4 items-center justify-end">
-                <button className="follow-btn rounded-2xl h-8 bg-red-300"
-                onClick={() => setIsEditModalOpen(false)}
-                >Discard</button>
-                <button className="follow-btn rounded-2xl h-8">Save</button>
+                <button
+                  className="follow-btn rounded-2xl h-8 bg-red-300"
+                  onClick={() => setIsEditModalOpen(false)}
+                >
+                  Discard
+                </button>
+                <button
+                  className="follow-btn rounded-2xl h-8"
+                  onClick={editBioHandler}
+                >
+                  Save
+                </button>
               </div>
             </div>
           </Modal>
