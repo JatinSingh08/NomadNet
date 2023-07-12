@@ -2,14 +2,16 @@ import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useRef, useState } from "react";
 import { BsFillCameraFill, BsFillEmojiSmileFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { avatar1 } from "../../backend/db/assets";
 import { authSelector } from "../../features/authSlice";
 import { createNewPost } from "../../features/postsSlice";
-import { avatar1 } from "../../backend/db/assets";
+import { userSelector } from "../../features/usersSlice";
 
 const CreatePost = () => {
   const [showEmojiPicker, setEmojiPicker] = useState(false);
   const emojiPickerRef = useRef(null);
   const emojiIconRef = useRef(null);
+  const { usersData } = useSelector(userSelector);
   const { encodedToken, foundUser } = useSelector(authSelector);
   const [postData, setPostData] = useState({
     firstName: foundUser?.firstName,
@@ -17,9 +19,10 @@ const CreatePost = () => {
     userId: foundUser?._id,
     content: "",
     postMedia: "",
-  }); 
+  });
   const dispatch = useDispatch();
 
+  const user = usersData?.find(user => user?.username === foundUser?.username);
   const createPostHandler = () => {
     if (postData.content.trim().length > 0 || postData.postMedia) {
       dispatch(createNewPost({ encodedToken, postData }));
@@ -54,7 +57,7 @@ const CreatePost = () => {
       <h1 className="text-start border-b-2 text-xl">Create Post</h1>
       <div className="border-b-2 mt-4 flex py-4 gap-2 justify-center items-center">
         <img
-          src={foundUser?.profile ?? avatar1}
+          src={user?.profile ?? avatar1}
           alt="vatar"
           className="w-14 h-14 rounded-full object-contain"
         />

@@ -1,6 +1,6 @@
 import React from 'react'
-import { CreatePost, Post } from '../../components'
 import { useSelector } from 'react-redux'
+import { Post } from '../../components'
 import { postsSelector } from '../../features/postsSlice'
 
 const Explore = () => {
@@ -14,7 +14,6 @@ const Explore = () => {
           />
         ))
       }
-      {/* <CreatePost /> */}
     </div>
   )
 }

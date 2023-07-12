@@ -1,7 +1,9 @@
 import { Modal } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { avatar1 } from "../../backend/db/assets";
+import {
+  avatars
+} from "../../backend/db/assets";
 import { authSelector } from "../../features/authSlice";
 import {
   editProfile,
@@ -15,14 +17,14 @@ const UserProfileCard = ({ user, usersData }) => {
   const dispatch = useDispatch();
 
   const [bioDetails, setBioDetails] = useState({
+    profile: user?.profile,
     bio: user?.bio,
     portfolio: user?.portfolio,
   });
-  
+
   const currentUser = usersData?.find(
     (user) => user.username === foundUser?.username
   );
-
 
   const isFollowed = currentUser?.following?.find(
     (followedUser) => followedUser._id === user._id
@@ -37,6 +39,7 @@ const UserProfileCard = ({ user, usersData }) => {
       ...user,
       bio: bioDetails?.bio,
       portfolio: bioDetails?.portfolio,
+      profile: bioDetails?.profile
     };
 
     if (
@@ -48,16 +51,21 @@ const UserProfileCard = ({ user, usersData }) => {
     }
   };
 
+
   const closeModal = () => {
     setIsEditModalOpen(false);
-    setBioDetails(val => ({...val, bio: user?.bio, portfolio: user?.portfolio}))
+    setBioDetails((val) => ({
+      ...val,
+      bio: user?.bio,
+      portfolio: user?.portfolio,
+    }));
   };
 
   return (
     <div className="card rounded-2xl p-4 flex flex-col gap-4">
       <div className="flex gap-3">
         <img
-          src={user?.profile || avatar1}
+          src={user?.profile || avatars[0]}
           alt="avatar"
           className="w-16 h-16 rounded-full object-contain"
         />
@@ -87,7 +95,7 @@ const UserProfileCard = ({ user, usersData }) => {
         ) : (
           <button
             className="follow-btn"
-            onClick={() => {                           
+            onClick={() => {
               if (isFollowed) {
                 dispatch(
                   unfollowUser({ encodedToken, unfollowUserId: user?._id })
@@ -123,33 +131,71 @@ const UserProfileCard = ({ user, usersData }) => {
           placeholder="center"
           footer={null}
         >
-          <div>
-            <label htmlFor="bio">
-              <h2 className="text-xl">Bio</h2>
-              <textarea
-                placeholder="Where are you rn ?!🌍"
-                value={bioDetails?.bio}
-                className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
-                onChange={(e) =>
-                  setBioDetails((val) => ({ ...val, bio: e.target.value }))
+          <div className="flex-col flex gap-3">
+            <div className="flex gap-2">
+              <div>
+                <img
+                  src={bioDetails?.profile}
+                  alt="avatar"
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+              </div>
+              <div className="flex flex-col text-start">
+                <h1 className="font-semibold text-xl">
+                  {user?.firstName + " " + user?.lastName}
+                </h1>
+                <p className="text-[12px] text-[#A6A0B9] -mt-0.5">@{user?.username}</p>
+              </div>
+            </div>
+            <div className="flex-col gap-2">
+              <h1 className="text-lg">choose avatar</h1>
+              <div className="flex gap-4 mt-1">
+                {
+                  avatars.map((avatar, idx) => (
+                    <button 
+                    value={avatar}
+                    key={idx}
+                    onClick={(e) => {
+                      setBioDetails(val => ({...val, profile: avatar}))
+                      console.log('avatar', avatar)
+                    }}
+                    >
+                      <img src={avatar} alt="avatar" className="w-10 h-10 rounded-full object-contain" />
+                    </button>
+                  ))
                 }
-              ></textarea>
-            </label>
+              </div>
+            </div>
 
-            <label htmlFor="portfolio">
-              <h2 className="text-xl">Portfolio</h2>
-              <textarea
-                placeholder="Showcase your creativity !!"
-                onChange={(e) =>
-                  setBioDetails((val) => ({
-                    ...val,
-                    portfolio: e.target.value,
-                  }))
-                }
-                className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none"
-                value={bioDetails?.portfolio}
-              ></textarea>
-            </label>
+            <div>
+              <label htmlFor="bio">
+                <h2 className="text-lg">Bio</h2>
+                <textarea
+                  placeholder="Where are you rn ?!🌍"
+                  value={bioDetails?.bio}
+                  className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none mt-1"
+                  onChange={(e) =>
+                    setBioDetails((val) => ({ ...val, bio: e.target.value }))
+                  }
+                ></textarea>
+              </label>
+            </div>
+            <div>
+              <label htmlFor="portfolio">
+                <h2 className="text-lg">Portfolio</h2>
+                <textarea
+                  placeholder="Showcase your creativity !!"
+                  onChange={(e) =>
+                    setBioDetails((val) => ({
+                      ...val,
+                      portfolio: e.target.value,
+                    }))
+                  }
+                  className="w-full px-4 bg-rose-100 rounded-lg outline-none pt-2 resize-none mt-1"
+                  value={bioDetails?.portfolio}
+                ></textarea>
+              </label>
+            </div>
 
             <div className="flex gap-3 mt-4 items-center justify-end">
               <button

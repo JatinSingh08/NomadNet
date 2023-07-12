@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { authSelector } from "../../features/authSlice";
-import { fetchUsers, userSelector } from "../../features/usersSlice";
+import { userSelector } from "../../features/usersSlice";
 import UserCard from "./UserCard";
 
 const Users = () => {

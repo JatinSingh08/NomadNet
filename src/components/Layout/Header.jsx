@@ -1,13 +1,17 @@
 import React from "react";
-import { BsMoonStars } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../../assets";
 import { authSelector } from "../../features/authSlice";
 import { avatar1 } from "../../backend/db/assets";
+import { userSelector } from "../../features/usersSlice";
 const Header = () => {
   const navigate = useNavigate();
   const { foundUser } = useSelector(authSelector);
+  const { usersData } = useSelector(userSelector);
+
+  const currentUser = usersData?.find(user => user.username === foundUser?.username);
+
   return (
     <div className="flex  items-center justify-between px-[160px] bg-white h-20 fixed left-0 right-0 top-0 z-50">
       <div
@@ -46,7 +50,7 @@ const Header = () => {
       <div className="flex items-center justify-center gap-7">
         {/* <BsMoonStars className="w-7 h-7 hover:cursor-pointer" fill="#5EBBFF" /> */}
         <img
-          src={foundUser?.profile || avatar1}
+          src={currentUser?.profile || avatar1}
           alt="avatar"
           className="w-14 h-14 rounded-full  object-contain cursor-pointer"
           onClick={() => navigate(`/profile/${foundUser?.username}`)}

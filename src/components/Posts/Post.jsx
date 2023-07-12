@@ -88,7 +88,7 @@ const Post = ({ postData, showComments, postId }) => {
     }
   };
 
-  console.log({userDetails})
+  console.log({ userDetails });
   const dropdownItems = [
     {
       label: (
@@ -110,7 +110,6 @@ const Post = ({ postData, showComments, postId }) => {
     },
   ];
 
-  
   return (
     <div className=" card p-5 rounded-xl">
       <div className="flex justify-between">
@@ -225,7 +224,7 @@ const Post = ({ postData, showComments, postId }) => {
         <div className="mt-6 flex flex-col gap-4">
           <div className="flex gap-1">
             <img
-              src={foundUser?.profile}
+              src={userDetails?.profile}
               alt="avatar"
               className="w-12 h-12 rounded-full object-contain"
             />

@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { HiLogout } from "react-icons/hi";
 import { MdExplore } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authSelector, logoutUser } from "../../features/authSlice";
 
 const Menubar = () => {
@@ -66,13 +66,15 @@ const Menubar = () => {
         </Link>
         <Link
           className={`flex gap-6 items-center hover:cursor-pointer ${
-            isActiveRoute(`/profile/${foundUser?.username}`) && "text-purple-800"
+            isActiveRoute(`/profile/${foundUser?.username}`) &&
+            "text-purple-800"
           }`}
           to={`/profile/${foundUser?.username}`}
         >
           <CgProfile
             className={` text-[#9E98B3] w-6 h-6 ${
-              isActiveRoute(`/profile/${foundUser?.username}`) && "text-purple-600"
+              isActiveRoute(`/profile/${foundUser?.username}`) &&
+              "text-purple-600"
             }`}
           />
           <span>Profile</span>

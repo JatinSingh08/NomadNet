@@ -66,27 +66,28 @@ const EditModal = ({
             ref={modalRef}
             className="bg-white w-96 h-80 p-6 rounded-lg shadow-lg m relative"
           >
-             <div className="absolute right-5 top-5 cursor-pointer"
-             onClick={() => setIsEditModalOpen(false)}
-             >
-                <IoCloseCircleOutline className="w-5 h-5" />
+            <div
+              className="absolute right-5 top-5 cursor-pointer"
+              onClick={() => setIsEditModalOpen(false)}
+            >
+              <IoCloseCircleOutline className="w-5 h-5" />
+            </div>
+            <div className="flex gap-2">
+              <img
+                src={userDetails?.profile}
+                alt="avatar"
+                className="w-10 h-10 object-contain rounded-full"
+              />
+              <div className="flex-col text-start ">
+                <h1 className="font-semibold text-[16px]">
+                  {userDetails?.firstName + " " + userDetails?.lastName}
+                </h1>
+                <p className="text-[12px] text-[#A6A0B9] -mt-1.5">
+                  @{userDetails?.username}
+                </p>
               </div>
-              <div className="flex gap-2">
-                <img
-                  src={userDetails?.profile}
-                  alt="avatar"
-                  className="w-10 h-10 object-contain rounded-full"
-                />
-                <div className="flex-col text-start ">
-                  <h1 className="font-semibold text-[16px]">
-                    {userDetails?.firstName + " " + userDetails?.lastName}
-                  </h1>
-                  <p className="text-[12px] text-[#A6A0B9] -mt-1.5">
-                    @{userDetails?.username}
-                  </p>
-                </div>
-              </div>
-             
+            </div>
+
             {/* <div className='mt-4 flex-col gap-10 '> */}
             <textarea
               placeholder="What is happening?!"

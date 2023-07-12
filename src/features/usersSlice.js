@@ -29,7 +29,9 @@ export const fetchUsers = createAsyncThunk(
       }
       return usersList;
     } catch (error) {
-      console.log({ error });
+      console.log({
+        error,
+      });
       return rejectWithValue(error?.message);
     }
   }
@@ -55,21 +57,21 @@ export const followUser = createAsyncThunk(
 
 export const unfollowUser = createAsyncThunk(
   "users/unfollowUser",
-  async ({ encodedToken, unfollowUserId}, { rejectWithValue }) => {
+  async ({ encodedToken, unfollowUserId }, { rejectWithValue }) => {
     try {
       const response = await unfollowUserService(encodedToken, unfollowUserId);
-      if( response.status === 200 || response.status === 201) {
+      if (response.status === 200 || response.status === 201) {
         return {
           followUser: response.data.followUser,
-          user: response.data.user
-        }
+          user: response.data.user,
+        };
       }
     } catch (error) {
       console.log(error?.message);
       return rejectWithValue(error?.message);
     }
   }
-)
+);
 
 export const bookmarkPost = createAsyncThunk(
   "users/bookmarkPost",
@@ -78,11 +80,14 @@ export const bookmarkPost = createAsyncThunk(
       const response = await bookmarksPostService(encodedToken, postId);
       if (response.status === 200 || response.status === 201) {
         let foundUser = null;
-        if (foundUser!== null && foundUser !== undefined ) {
+        if (foundUser !== null && foundUser !== undefined) {
           foundUser = JSON.parse(localStorage.getItem("foundUser"));
           localStorage.setItem(
             "foundUser",
-            JSON.stringify({ ...foundUser, bookmarks: response.data.bookmarks })
+            JSON.stringify({
+              ...foundUser,
+              bookmarks: response.data.bookmarks,
+            })
           );
         }
         return {
@@ -108,10 +113,16 @@ export const removeBookmarkPost = createAsyncThunk(
           foundUser = JSON.parse(localStorage.getItem("foundUser"));
           localStorage.setItem(
             "foundUser",
-            JSON.stringify({ ...foundUser, bookmarks: response.data.bookmarks })
+            JSON.stringify({
+              ...foundUser,
+              bookmarks: response.data.bookmarks,
+            })
           );
         }
-        return { bookmarks: response.data.bookmarks, username };
+        return {
+          bookmarks: response.data.bookmarks,
+          username,
+        };
       }
     } catch (error) {
       console.log(error?.message);
@@ -130,12 +141,13 @@ export const editProfile = createAsyncThunk(
         return response.data.user;
       }
     } catch (error) {
-      console.log({ error });
+      console.log({
+        error,
+      });
       return rejectWithValue(error.message);
     }
   }
 );
-
 
 const usersSlice = createSlice({
   name: "users",
@@ -183,13 +195,17 @@ const usersSlice = createSlice({
       })
       .addCase(followUser.fulfilled, (state, action) => {
         const { followUser, user } = action.payload;
-        const followUserIndex = state?.usersData?.findIndex(user => user._id === followUser._id);
-        const userIndex = state?.usersData?.findIndex(userObj => userObj._id === user._id);
+        const followUserIndex = state?.usersData?.findIndex(
+          (user) => user._id === followUser._id
+        );
+        const userIndex = state?.usersData?.findIndex(
+          (userObj) => userObj._id === user._id
+        );
 
-        if(followUserIndex !== undefined) {
+        if (followUserIndex !== undefined) {
           state.usersData[followUserIndex] = followUser;
         }
-        if(userIndex !== undefined ) {
+        if (userIndex !== undefined) {
           state.usersData[userIndex] = user;
           localStorage.setItem("foundUser", JSON.stringify(user));
         }
@@ -203,15 +219,19 @@ const usersSlice = createSlice({
       })
       .addCase(unfollowUser.fulfilled, (state, action) => {
         const { followUser, user } = action.payload;
-        const unfollowUserIndex = state?.usersData?.findIndex( user => user._id === followUser._id);
-        const userIndex = state?.usersData?.findIndex(userObj => userObj._id === user._id);
+        const unfollowUserIndex = state?.usersData?.findIndex(
+          (user) => user._id === followUser._id
+        );
+        const userIndex = state?.usersData?.findIndex(
+          (userObj) => userObj._id === user._id
+        );
 
-        if(unfollowUserIndex !== undefined) {
+        if (unfollowUserIndex !== undefined) {
           state.usersData[unfollowUserIndex] = followUser;
         }
-        if(userIndex !== undefined) {
+        if (userIndex !== undefined) {
           state.usersData[userIndex] = user;
-          localStorage.setItem("foundUser", JSON.stringify(user))
+          localStorage.setItem("foundUser", JSON.stringify(user));
         }
         state.disabled.followDisabled = false;
       })
