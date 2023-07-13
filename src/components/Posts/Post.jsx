@@ -48,7 +48,9 @@ const Post = ({ postData, showComments, postId }) => {
     postData?._id,
     foundUser?.username
   );
+
   const userDetails = usersData?.find((user) => postData?.userId === user?._id);
+  const currentUser = usersData?.find(user => foundUser?.username === user?.username);
 
   const commentHandler = () => {
     const posts = postsData?.map((post) =>
@@ -224,7 +226,7 @@ const Post = ({ postData, showComments, postId }) => {
         <div className="mt-6 flex flex-col gap-4">
           <div className="flex gap-1">
             <img
-              src={userDetails?.profile}
+              src={currentUser?.profile}
               alt="avatar"
               className="w-12 h-12 rounded-full object-contain"
             />

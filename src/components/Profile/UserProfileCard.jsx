@@ -10,10 +10,12 @@ import {
   followUser,
   unfollowUser,
 } from "../../features/usersSlice";
+import { postsSelector } from "../../features/postsSlice";
 
 const UserProfileCard = ({ user, usersData }) => {
   const { encodedToken, foundUser } = useSelector(authSelector);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { postsData } = useSelector(postsSelector);
   const dispatch = useDispatch();
 
   const [bioDetails, setBioDetails] = useState({
@@ -25,6 +27,13 @@ const UserProfileCard = ({ user, usersData }) => {
   const currentUser = usersData?.find(
     (user) => user.username === foundUser?.username
   );
+
+  const userPostsCount = postsData?.reduce((acc, curr) => {
+    if(curr?.userId === user?._id) {
+      return acc = acc + 1;
+    }
+    return acc;
+  } , 0)
 
   const isFollowed = currentUser?.following?.find(
     (followedUser) => followedUser._id === user._id
@@ -111,7 +120,7 @@ const UserProfileCard = ({ user, usersData }) => {
       </div>
       <div className="flex gap-2">
         <div className="flex gap-1">
-          <h1>2</h1>
+          <h1>{userPostsCount}</h1>
           <p className="text-[#A6A0B9]">Posts</p>
         </div>
         <div className="flex gap-1">
