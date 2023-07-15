@@ -5,7 +5,7 @@ import { AiOutlineShareAlt } from "react-icons/ai";
 import { FaRegCommentDots } from "react-icons/fa";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { avatar1 } from "../../backend/db/assets";
 import { authSelector } from "../../features/authSlice";
@@ -33,9 +33,10 @@ const Post = ({ postData, showComments, postId }) => {
   const { encodedToken, foundUser } = useSelector(authSelector);
   const { usersData } = useSelector(userSelector);
   const { postsData } = useSelector(postsSelector);
+  const location = useLocation();
   const [comment, setComment] = useState({
     _id: uuid(),
-    comment: "",
+    commentText: "",
     createdAt: new Date(),
     firstName: foundUser?.firstName,
     lastName: foundUser?.lastName,
@@ -55,13 +56,16 @@ const Post = ({ postData, showComments, postId }) => {
   const commentHandler = () => {
     const posts = postsData?.map((post) =>
       post._id === postId
-        ? { ...post, comments: [...post.comments, comment] }
+        ? { ...post, comments: [...post.comments, comment.commentText] }
         : { ...post }
     );
     const postData = posts?.find((post) => post._id === postId);
     console.log("commented posts", posts);
     dispatch(commentOnPost({ encodedToken, postData }));
+    console.log({posts});
   };
+
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -91,6 +95,12 @@ const Post = ({ postData, showComments, postId }) => {
   };
 
   console.log({ userDetails });
+
+  const copyToClipboard = async () => {
+    const currentUrl = window.location.href;
+    await navigator.clipboard.writeText(currentUrl);
+  }
+
   const dropdownItems = [
     {
       label: (
@@ -189,7 +199,9 @@ const Post = ({ postData, showComments, postId }) => {
               <FaRegCommentDots className="cursor-pointer" />
               <p className="text-sm">{postData?.comments?.length}</p>
             </button>
-            <button>
+            <button
+            onClick={copyToClipboard}
+            >
               <AiOutlineShareAlt className="cursor-pointer icon-theme" />
             </button>
           </div>
