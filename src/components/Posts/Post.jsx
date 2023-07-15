@@ -94,10 +94,10 @@ const Post = ({ postData, showComments, postId }) => {
     }
   };
 
-  console.log({ userDetails });
 
   const copyToClipboard = async () => {
-    const currentUrl = window.location.href;
+    const currentUrl = window.location;
+    console.log('copied', {currentUrl})
     await navigator.clipboard.writeText(currentUrl);
   }
 
@@ -139,7 +139,6 @@ const Post = ({ postData, showComments, postId }) => {
             >
               {postData?.firstName + " " + postData?.lastName}
             </p>
-            {/* <p>{postData?.createdAt}</p> */}
             <p className="text-[13px] text-[#928da5]">
               {formatDate(postData?.createdAt)}
             </p>
