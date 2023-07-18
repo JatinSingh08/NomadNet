@@ -29,7 +29,7 @@ const LoginForm = () => {
   }, [encodedToken]);
 
   return (
-    <form className="h-full md:mx-1  z-10 form-container" onSubmit={submitHandler}>
+    <form className="h-full md:mx-1  z-10" onSubmit={submitHandler}>
       <div className="w-96  m-auto mt-24 md:mt-44 md:mx-auto h-auto p-4 border rounded-md drop-shadow-sm flex flex-col gap-3">
         <div className="flex items-center justify-center m-auto">
           <img src={Logo} alt="logo" />
