@@ -29,7 +29,7 @@ const LoginForm = () => {
   }, [encodedToken]);
 
   return (
-    <form className="h-full mb-20 md:mx-1" onSubmit={submitHandler}>
+    <form className="h-full md:mx-1  z-10 form-container" onSubmit={submitHandler}>
       <div className="w-96  m-auto mt-24 md:mt-44 md:mx-auto h-auto p-4 border rounded-md drop-shadow-sm flex flex-col gap-3">
         <div className="flex items-center justify-center m-auto">
           <img src={Logo} alt="logo" />
@@ -61,23 +61,23 @@ const LoginForm = () => {
           />
         </div>
         <button
-          className=" bg-slate-900  text-slate-100 shadow-2xl px-2 py-1 active:scale-90 transition-all duration-100 ease-in-out "
+          className=" bg-slate-900  text-slate-100 shadow-2xl rounded-lg px-2 py-1.5 active:scale-90 transition-all duration-100 ease-in-out "
           type="submit"
           disabled={loggingIn}
         >
           {loggingIn ? "Logging In..." : "Log In"}
         </button>
         <button
-          className=" bg-slate-200  text-slate-900 shadow-2xl px-2 py-1 active:scale-90 transition-all duration-100 ease-in-out "
+          className=" bg-slate-200  text-slate-900 shadow-2xl rounded-lg px-2 py-1.5 active:scale-90 transition-all duration-100 ease-in-out "
           onClick={() => setUserDetails(guestUserDetails)}
         >
           Login as Guest
         </button>
         <div className="text-gray-600 m-auto">
-          <p className="text-xl mb-0">
+          <p className="text-xl mb-0 text-slate-200">
             Don't have an account?
             <Link to="/signup">
-              <span className="text-slate-900 underline ml-2">Signup</span>
+              <span className="text-slate-900 underline ml-2 font-medium">Signup</span>
             </Link>
           </p>
         </div>
