@@ -74,7 +74,7 @@ const LoginForm = () => {
           Login as Guest
         </button>
         <div className="text-gray-600 m-auto">
-          <p className="text-xl mb-0 text-slate-200">
+          <p className="text-xl mb-0 text-slate-400">
             Don't have an account?
             <Link to="/signup">
               <span className="text-slate-900 underline ml-2 font-medium">Signup</span>
